@@ -1,5 +1,5 @@
 requests == 2.20.0
-PyTelegramBotAPI == 2.2.3
+pytelegrambotapi
 telebot
 boto3
 Pillow
