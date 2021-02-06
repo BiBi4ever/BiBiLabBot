@@ -25,6 +25,7 @@ def send_first_message(message):
         bot.send_message(message.from_user.id, 'Hello you! Со мной ты можешь быстро рассчитать необходимые концентрации, предобработать данные, оценить их качество и сделать многое другое! Напиши \'/help\', чтобы увидеть все возможные функции.')
     elif any(word in message.text.lower() for word in task):
         bot.send_message(message.from_user.id, 'упс, пока что функция в разработке')
+#бот кидает мемосную картиночку
     else:
         img = Image.open(urlopen(url))
         bot.send_photo(message.chat.id, img)
