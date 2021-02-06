@@ -1,7 +1,11 @@
 import telebot
 from PIL import Image
 from urllib.request import urlopen
+#from boto.s3.connection import S3Connection
+import os
 
+#token = S3Connection(os.environ['token'])
+token = os.environ.get('token')
 
 #картинка
 url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/arHUSXBmA5Y.jpg?size=527x505&quality=96&proxy=1&sign=3103cde7044a879a6d8e76a5b8ab2d62&type=album"
