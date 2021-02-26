@@ -5,8 +5,7 @@ storage = {
 'reverse transcription' : 'https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view',
 'usual PCR' : 'link2',
 'rt-PCR with zond' : 'link3',
-'rt-PCR with SB' : 'link4',
-'matohondria extraction' : 'https://drive.google.com/file/d/1qdCp3c_XPhX-r2aCq27c5JbfsbAvLIwg/view'
+'rt-PCR with SB' : 'link4'
 }
 # пока так, ждем заполнения файлов со ссылками на гугл диск или привлечением самого гугл API, прошу сохранить названия слов в ключах, потому что клавиатура ссылается на них 
 
