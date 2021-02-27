@@ -86,5 +86,3 @@ def send_first_message(message):
         bot.send_photo(message.chat.id, img)
         img.close()
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Напиши \'Hello\' чтобы начать')
-
-bot.polling(True)
