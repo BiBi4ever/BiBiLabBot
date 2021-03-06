@@ -17,13 +17,13 @@ bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-         bot.reply_to(message, f'Hello you, {message.from_user.first_name}!\U0001F44B\nЯ бот, облегчающий работу в лаборатории. Чтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных команд, нажми /help.')
+         bot.reply_to(message, f'Hello you, {message.from_user.first_name}!\U0001F44B\nЯ бот, облегчающий работу в лаборатории. Чтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')
 
 @bot.message_handler(commands=['help'])
 def help_message(message):
     bot.send_message(message.chat.id, ' С моей помощью ты можешь увидеть протоколы для '
                                       'работы с нуклеиновыми кислотами, обратной транскрипции и '
-                                      'ПЦР. ' 
+                                      'ПЦР.\n' 
                      'Чтобы найти нужный протокол, нажми /protocols. Выбирай готовый поиск с кнопками или воспользуйся поиском по ключу - и введи ключевое слово.'
 )
 # Команда для работы с протоколами, если пользователь выбирает поиск по ключу (вызов key), он вводит слова для протокола сам, если выбирает кнопку ( вызов button) - тыкает на варианты
