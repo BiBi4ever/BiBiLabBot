@@ -35,39 +35,38 @@ def exchange_command(message):
         telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
 
-    @bot.callback_query_handler(func=lambda call: call.data in ['key', 'button'] )
-    def query_handler(call1):
-        if call1.data == 'key':
-            bot.send_message(message.chat.id, 'Напишите нужный ключ. Учитываются варианты') #(Можете перечислить допустимые слова)
+@bot.callback_query_handler(func=lambda call: call.data in ['key', 'button'] )
+def query_handler(call1):
+    if call1.data == 'key':
+        bot.send_message(message.chat.id, 'Напишите нужный ключ. Учитываются варианты') #(Можете перечислить допустимые слова)
             #МЕСТО ДЛЯ КОДА ПОИСКА ПО КЛЮЧУ, ДОЛЖНО НАЧИНАТЬСЯ С ВВОДА КЛЮЧА
          
          
          
-        elif call1.data == 'button':
-            keyboard1 = telebot.types.InlineKeyboardMarkup()
-            keyboard1.row(
+    elif call1.data == 'button':
+        keyboard1 = telebot.types.InlineKeyboardMarkup()
+        keyboard1.row(
                 telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
                 telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'))
-            bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard1)
-
-            @bot.callback_query_handler(func=lambda call: call.data in ['acid', 'PCR'] )
-            def query_handler2(call2):
-                if call2.data == 'acid':
-                    keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
-                    keyboard2.add(
+        bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard1)
+@bot.callback_query_handler(func=lambda call: call.data in ['acid', 'PCR'] )
+def query_handler2(call2):
+    if call2.data == 'acid':
+        keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
+        keyboard2.add(
                     telebot.types.InlineKeyboardButton('Выделение ДНК по Хомчински', url='https://drive.google.com/file/d/1DmogZzc5-vEgDxxqiCB4sC3wHOb9KYHc/view?usp=sharing'),
                     telebot.types.InlineKeyboardButton('Выделение ДНК на магнитах', url='https://drive.google.com/file/d/1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd/view?usp=sharing'),
                     telebot.types.InlineKeyboardButton('Выделение РНК ', url='https://drive.google.com/file/d/1mzLZRFX3hDsQpm18QD_op8mg89E29Z-P/view'),
                     telebot.types.InlineKeyboardButton('Обратная транскрипция', url='https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view'))
-                    bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2)
+        bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2)
 
-                elif call2.data == 'PCR':
-                    keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
-                    keyboard2.add(
+    elif call2.data == 'PCR':
+        keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
+        keyboard2.add(
                 telebot.types.InlineKeyboardButton('Обычная ПЦР', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/1.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
-                    bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2) 
+        bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2) 
 #Приветствие
 @bot.message_handler(content_types=['text'])
 def send_first_message(message):
