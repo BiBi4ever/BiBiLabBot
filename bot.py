@@ -35,7 +35,7 @@ def exchange_command(message):
         telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
 
-    @bot.callback_query_handler(func=lambda call: call.data in ['key', 'button'] )
+    @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
         if call1.data == 'key':
             bot.send_message(message.chat.id, 'Напишите нужный ключ. Учитываются варианты') #(Можете перечислить допустимые слова)
@@ -49,7 +49,7 @@ def exchange_command(message):
                 telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
                 telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'))
             bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard1)
-    @bot.callback_query_handler(func=lambda call: call.data in ['acid', 'PCR'] )
+    @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
     def query_handler2(call2):
         if call2.data == 'acid':
             keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
