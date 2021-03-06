@@ -38,8 +38,9 @@ def exchange_command(message):
     @bot.callback_query_handler(func=lambda call: call.data in ['key', 'button'] )
     def query_handler(call1):
         if call1.data == 'key':
-            bot.send_message(message.chat.id, 'Напишите нужный ключ. Учитываются варианты') #(Можете перечислить допустимые слова)
+           #bot.send_message(message.chat.id, 'Напишите нужный ключ. Учитываются варианты') #(Можете перечислить допустимые слова)
             #МЕСТО ДЛЯ КОДА ПОИСКА ПО КЛЮЧУ, ДОЛЖНО НАЧИНАТЬСЯ С ВВОДА КЛЮЧА
+            bot.answer_callback_query(callback_query.id,'Напишите нужный ключ. Учитываются варианты')
          
          
          
