@@ -24,7 +24,7 @@ def help_message(message):
     bot.send_message(message.chat.id, ' С моей помощью ты можешь увидеть протоколы для '
                                       'работы с нуклеиновыми кислотами, обратной транскрипции и '
                                       'ПЦР. ' 
-                     'Чтобы найти нужный протокол, выбирай готовый поиск с кнопками или воспользуйся поиском по ключу - и введи ключевое слово.'
+                     'Чтобы найти нужный протокол, нажми /protocols. Выбирай готовый поиск с кнопками или воспользуйся поиском по ключу - и введи ключевое слово.'
 )
 # Команда для работы с протоколами, если пользователь выбирает поиск по ключу (вызов key), он вводит слова для протокола сам, если выбирает кнопку ( вызов button) - тыкает на варианты
 @bot.message_handler(commands=['protocols'])
@@ -58,7 +58,7 @@ def exchange_command(message):
                     telebot.types.InlineKeyboardButton('Выделение ДНК на магнитах', url='https://drive.google.com/file/d/1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd/view?usp=sharing'),
                     telebot.types.InlineKeyboardButton('Выделение РНК ', url='https://drive.google.com/file/d/1mzLZRFX3hDsQpm18QD_op8mg89E29Z-P/view'),
                     telebot.types.InlineKeyboardButton('Обратная транскрипция', url='https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view'))
-            bot.edit_message_text(call2.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2)
+            bot.send_message(call2.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2)
 
         elif call2.data == 'PCR':
             keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
@@ -66,7 +66,7 @@ def exchange_command(message):
                 telebot.types.InlineKeyboardButton('Обычная ПЦР', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/1.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
-            bot.edit_message_text(call2.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2) 
+            bot.send_message(call2.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2) 
 #Ответ на приветствие
 @bot.message_handler(content_types=['text'])
 def send_first_message(message):
