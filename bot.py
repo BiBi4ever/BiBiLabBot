@@ -64,10 +64,10 @@ def exchange_command(message):
                 elif call2.data == 'PCR':
                     keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
                     keyboard2.add(
-                telebot.types.InlineKeyboardButton('Обычная ПЦР', url='link2'),
-                telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='link3'),
-                telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='link4'))
-                    bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard) 
+                telebot.types.InlineKeyboardButton('Обычная ПЦР', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/1.png'),
+                telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
+                telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
+                    bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2) 
 #Приветствие
 @bot.message_handler(content_types=['text'])
 def send_first_message(message):
