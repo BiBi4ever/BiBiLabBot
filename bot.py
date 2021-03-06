@@ -55,10 +55,10 @@ def exchange_command(message):
                 if call2.data == 'acid':
                     keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
                     keyboard2.add(
-                    telebot.types.InlineKeyboardButton('Выделение ДНК по Хомчински', url=''),
-                    telebot.types.InlineKeyboardButton('Выделение ДНК на магнитах', url=''),
-                    telebot.types.InlineKeyboardButton('Выделение РНК ', url=''),
-                    telebot.types.InlineKeyboardButton('Обратная транскрипция', url=''))
+                    telebot.types.InlineKeyboardButton('Выделение ДНК по Хомчински', url='https://drive.google.com/file/d/1DmogZzc5-vEgDxxqiCB4sC3wHOb9KYHc/view?usp=sharing'),
+                    telebot.types.InlineKeyboardButton('Выделение ДНК на магнитах', url='https://drive.google.com/file/d/1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd/view?usp=sharing'),
+                    telebot.types.InlineKeyboardButton('Выделение РНК ', url='https://drive.google.com/file/d/1mzLZRFX3hDsQpm18QD_op8mg89E29Z-P/view'),
+                    telebot.types.InlineKeyboardButton('Обратная транскрипция', url='https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view'))
                     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2)
 
                 elif call2.data == 'PCR':
