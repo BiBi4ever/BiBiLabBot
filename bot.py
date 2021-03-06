@@ -55,25 +55,19 @@ def exchange_command(message):
                 if call2.data == 'acid':
                     keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
                     keyboard2.add(
-                    telebot.types.InlineKeyboardButton('Выделение ДНК по Хомчински', callback_data='xom'),
-                    telebot.types.InlineKeyboardButton('Выделение ДНК на магнитах', callback_data='mag'),
-                    telebot.types.InlineKeyboardButton('Выделение РНК ', callback_data='rna'),
-                    telebot.types.InlineKeyboardButton('Обратная транскрипция', callback_data='reverse'))
+                    telebot.types.InlineKeyboardButton('Выделение ДНК по Хомчински', url=''),
+                    telebot.types.InlineKeyboardButton('Выделение ДНК на магнитах', url=''),
+                    telebot.types.InlineKeyboardButton('Выделение РНК ', url=''),
+                    telebot.types.InlineKeyboardButton('Обратная транскрипция', url=''))
                     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2)
 
                 elif call2.data == 'PCR':
                     keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
                     keyboard2.add(
-                telebot.types.InlineKeyboardButton('Обычная ПЦР', callback_data='usual'),
-                telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', callback_data='zond'),
-                telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', callback_data='SB'))
-                    bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2)
-
-                @bot.callback_query_handler(func=lambda call: call.data in ['xom','mag','rna','reverse','usual','zond','SB'])
-                def query_handler3(call3):
-                    for i in storage.keys():
-                        if call3.data in i:
-                            bot.send_message(message.from_user.id, storage[i])
+                telebot.types.InlineKeyboardButton('Обычная ПЦР', url='link2'),
+                telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='link3'),
+                telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='link4'))
+                    bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard) 
 #Приветствие
 @bot.message_handler(content_types=['text'])
 def send_first_message(message):
