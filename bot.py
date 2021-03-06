@@ -40,7 +40,7 @@ def exchange_command(message):
         if call1.data == 'key':
 
             #МЕСТО ДЛЯ КОДА ПОИСКА ПО КЛЮЧУ, ДОЛЖНО НАЧИНАТЬСЯ С ВВОДА КЛЮЧА
-            bot.edit_message_text(call1.message.chat.id, call1.message.message_id, 'later LOL')
+            bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='later LOL')
          
          
         elif call1.data == 'button':
