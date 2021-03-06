@@ -67,17 +67,17 @@ def exchange_command(message):
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
             bot.send_message(call2.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2) 
-#Приветствие
+#Ответ на приветствие
 @bot.message_handler(content_types=['text'])
 def send_first_message(message):
-    greet = ['hello','hi','привет']
+    greet = ['hello','hi','привет', 'здравствуй']
     if any(greetings in message.text.lower() for greetings in greet):
-        bot.send_message(message.from_user.id, 'Hello you! Со мной ты можешь быстро рассчитать необходимые концентрации, предобработать данные, оценить их качество и сделать многое другое! Напиши \'/help\', чтобы увидеть все возможные функции.')
+        bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал по тебе')
 #бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
     else:
         img = Image.open(urlopen(url))
         bot.send_photo(message.chat.id, img)
         img.close()
-        bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Напиши \'Hello\' чтобы начать')
+        bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
         
 bot.polling(True)
