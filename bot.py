@@ -2,7 +2,10 @@ import telebot
 from PIL import Image
 from urllib.request import urlopen
 import os
-
+import pickle 
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 from dictionary_for_files import storage   #словарь 
 
 token = os.environ.get('token')
@@ -88,3 +91,5 @@ def send_first_message(message):
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Напиши \'Hello\' чтобы начать')
 
 bot.polling(True)
+
+SCOPES = ['https://www.googleapis.com/auth/drive'] #делать всякое разное с диском(
