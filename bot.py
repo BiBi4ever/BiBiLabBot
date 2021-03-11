@@ -3,7 +3,7 @@ from PIL import Image
 from urllib.request import urlopen
 import os
 
-from dictionary_for_files import storage   #словарь 
+from dictionary_for_files import storageKey   #словарь 
 
 token = os.environ.get('token')
 
