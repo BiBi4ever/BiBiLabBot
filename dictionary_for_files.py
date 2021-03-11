@@ -4,7 +4,7 @@ storageKey = {
 'выделение днк магнитные частицы магниты dna' : 'https://drive.google.com/file/d/1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd/view?usp=sharing',
 'выделение рнк rna' : 'https://drive.google.com/file/d/1mzLZRFX3hDsQpm18QD_op8mg89E29Z-P/view',
 'обратная транскрипция reverse transcription' : 'https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view',
-'обычная пцр usual PCR' : 'link2',
-'реал тайм real time  пцр с зондом rt-PCR with zond' : 'link3',
-'реал тайм real time пцр sybr green rt-PCR with SB' : 'link4'
+'обычная пцр pcr usual PCR' : 'link2',
+'реал тайм real time pcr пцр с зондом rt-PCR with zond' : 'link3',
+'реал тайм real time pcr пцр sybr green rt-PCR with SB' : 'link4'
 }
