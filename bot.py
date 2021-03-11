@@ -10,10 +10,18 @@ token = os.environ.get('token')
 #картинка
 url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/arHUSXBmA5Y.jpg?size=527x505&quality=96&proxy=1&sign=3103cde7044a879a6d8e76a5b8ab2d62&type=album"
 
-
-
-
 bot = telebot.TeleBot(token)
+
+# словарь для поиска по ключевым словам (см функцию внизу и в коде с кнопками)
+storageKey = {
+    'выделение днк хомченко по-хомченко dna' : 'https://drive.google.com/file/d/1DmogZzc5-vEgDxxqiCB4sC3wHOb9KYHc/view?usp=sharing',
+'выделение днк магнитные частицы магниты dna' : 'https://drive.google.com/file/d/1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd/view?usp=sharing',
+'выделение рнк rna' : 'https://drive.google.com/file/d/1mzLZRFX3hDsQpm18QD_op8mg89E29Z-P/view',
+'обратная транскрипция reverse transcription' : 'https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view',
+'обычная пцр usual PCR' : 'link2',
+'реал тайм real time  пцр с зондом rt-PCR with zond' : 'link3',
+'реал тайм real time пцр sybr green rt-PCR with SB' : 'link4'
+}
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -39,9 +47,9 @@ def exchange_command(message):
     def query_handler(call1):
         if call1.data == 'key':
 
-            #МЕСТО ДЛЯ КОДА ПОИСКА ПО КЛЮЧУ, ДОЛЖНО НАЧИНАТЬСЯ С ВВОДА КЛЮЧА
-            bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='later LOL')
-         
+            # поиск по ключу, см. функцию ниже:
+            send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Напишите нужный ключ')
+            bot.register_next_step_handler(send,keys)
          
         elif call1.data == 'button':
             keyboard1 = telebot.types.InlineKeyboardMarkup()
@@ -79,5 +87,18 @@ def send_first_message(message):
         bot.send_photo(message.chat.id, img)
         img.close()
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
-        
+
+# функция поиска по ключу
+def keys(message):
+    list = [*storageKey]
+    found_links = []
+    for i in list:
+        if message.text.lower() in i:
+            found_links.append(storageKey[i])
+    if len(found_links) > 0:
+        bot.send_message(message.from_user.id, "\n\n".join(found_links))
+    else:
+        bot.send_message(message.from_user.id,
+                                 'Совпадений не найдено. Попробуй ввести другое слово, например: ДНК.\nНажми /protocols, чтобы начать поиск')        
+         
 bot.polling(True)
