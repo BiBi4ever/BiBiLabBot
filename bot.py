@@ -12,17 +12,6 @@ url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/a
 
 bot = telebot.TeleBot(token)
 
-# словарь для поиска по ключевым словам (см функцию внизу и в коде с кнопками)
-storageKey = {
-    'выделение днк хомченко по-хомченко dna' : 'https://drive.google.com/file/d/1DmogZzc5-vEgDxxqiCB4sC3wHOb9KYHc/view?usp=sharing',
-'выделение днк магнитные частицы магниты dna' : 'https://drive.google.com/file/d/1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd/view?usp=sharing',
-'выделение рнк rna' : 'https://drive.google.com/file/d/1mzLZRFX3hDsQpm18QD_op8mg89E29Z-P/view',
-'обратная транскрипция reverse transcription' : 'https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view',
-'обычная пцр usual PCR' : 'link2',
-'реал тайм real time  пцр с зондом rt-PCR with zond' : 'link3',
-'реал тайм real time пцр sybr green rt-PCR with SB' : 'link4'
-}
-
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
          bot.reply_to(message, f'Hello you, {message.from_user.first_name}!\U0001F44B\nЯ бот, облегчающий работу в лаборатории. Чтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')
