@@ -21,9 +21,9 @@ def help_message(message):
     bot.send_message(message.chat.id, ' С моей помощью ты можешь увидеть протоколы для '
                                       'работы с нуклеиновыми кислотами, обратной транскрипции и '
                                       'ПЦР.\n\n' 
-                     'Чтобы найти нужный протокол, нажми /protocols. Выбирай готовый поиск с кнопками или воспользуйся поиском по ключу - введи ключевое слово.'
+                     'Чтобы найти нужный протокол, нажми /protocols. Выбирай поиск с кнопками или воспользуйся поиском по ключу - введи ключевое слово.'
 )
-# Команда для работы с протоколами, если пользователь выбирает поиск по ключу (вызов key), он вводит слова для протокола сам, если выбирает кнопку ( вызов button) - тыкает на варианты
+# Команда для работы с протоколами, если пользователь выбирает поиск по ключу (вызов key), он вводит слова для протокола сам, если выбирает кнопку (вызов button) - тыкает на варианты
 @bot.message_handler(commands=['protocols'])
 def exchange_command(message):
     keyboard = telebot.types.InlineKeyboardMarkup()
@@ -68,7 +68,7 @@ def exchange_command(message):
 def send_first_message(message):
     greet = ['hello','hi','привет', 'здравствуй']
     if any(greetings in message.text.lower() for greetings in greet):
-        bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал по тебе')
+        bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал')
 #бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
     else:
         img = Image.open(urlopen(url))
