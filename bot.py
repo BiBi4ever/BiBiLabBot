@@ -84,7 +84,7 @@ def keys(message):
         if message.text.lower() in i:
             found_links.append(storageKey[i])
     if len(found_links) > 0:
-        bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\\U0001F44BЧтобыначать новый поиск, нажми /protocols')
+        bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\\U0001F44B Чтобы начать новый поиск, нажми /protocols')
     else:
         bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуй ввести другое слово, например: ДНК.\nНажми /protocols, чтобы начать поиск')        
