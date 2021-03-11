@@ -32,7 +32,7 @@ def help_message(message):
     bot.send_message(message.chat.id, ' С моей помощью ты можешь увидеть протоколы для '
                                       'работы с нуклеиновыми кислотами, обратной транскрипции и '
                                       'ПЦР.\n\n' 
-                     'Чтобы найти нужный протокол, нажми /protocols. Выбирай готовый поиск с кнопками или воспользуйся поиском по ключу - и введи ключевое слово.'
+                     'Чтобы найти нужный протокол, нажми /protocols. Выбирай готовый поиск с кнопками или воспользуйся поиском по ключу - введи ключевое слово.'
 )
 # Команда для работы с протоколами, если пользователь выбирает поиск по ключу (вызов key), он вводит слова для протокола сам, если выбирает кнопку ( вызов button) - тыкает на варианты
 @bot.message_handler(commands=['protocols'])
@@ -46,7 +46,6 @@ def exchange_command(message):
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
         if call1.data == 'key':
-
             # поиск по ключу, см. функцию ниже:
             send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи ключевое слово')
             bot.register_next_step_handler(send,keys)
@@ -97,6 +96,7 @@ def keys(message):
             found_links.append(storageKey[i])
     if len(found_links) > 0:
         bot.send_message(message.from_user.id, "\n\n".join(found_links))
+        bot.send_message(message.from_user.id, 'Чтобы начать новый поиск, нажми /protocols'.
     else:
         bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуй ввести другое слово, например: ДНК.\nНажми /protocols, чтобы начать поиск')        
