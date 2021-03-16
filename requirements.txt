@@ -4,4 +4,4 @@ pytelegrambotapi
 telebot
 boto3
 Pillow
-Task
+myqueue.task
