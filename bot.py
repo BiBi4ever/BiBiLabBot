@@ -59,12 +59,11 @@ def keys(message):
     for i in list:
         if message.text.lower() in i:
             found_links.append(storageKey[i])
-    if len(found_links) > 0:
-        bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\U0001F50E Чтобы начать новый поиск, нажми /protocols')
-    else:
+    if len(found_links) < 0:
         send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуй ввести другое слово, например: ДНК')
         bot.register_next_step_handler(send_me, keys)
         return
+    bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\U0001F50E Чтобы начать новый поиск, нажми /protocols')
  
 bot.polling(True)
