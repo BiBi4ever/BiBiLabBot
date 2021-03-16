@@ -41,12 +41,12 @@ def exchange_command(message):
          
         elif call1.data == 'button':
             reply= types.ReplyKeybordMarkup(resize_keybord = True)
-            PCR= types.KeyboardButton("ПЦР")
-            protein= types.KeyboardButton("Белки")
+            PCR_id= types.KeyboardButton("ПЦР")
+            protein_id= types.KeyboardButton("Белки")
             
-            reply.add( PCR, protein)
-            client.send_message(call1.message.chat.id, 'Выберите нужный вариант")
-                                
+            reply.add( PCR_id, protein_id)
+            client.send_message(call1.message.chat.id, "Выберите нужный вариант")
+                  reply_markup = reply            
                                 
     @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
     def query_handler2(call2):
