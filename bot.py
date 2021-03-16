@@ -65,4 +65,16 @@ def exchange_command(message):
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
             bot.send_message(call2.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2) 
+                  
+   def keys(message):
+    list = [*storageKey]
+    found_links = []
+    for i in list:
+        if message.text.lower() in i:
+            found_links.append(storageKey[i])
+    if len(found_links) > 0:
+        bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\U0001F50E Чтобы начать новый поиск, нажми /protocols')
+    else:
+        bot.send_message(message.from_user.id,
+                                 'Совпадений не найдено. Попробуй ввести другое слово, например: ДНК.\nНажми /protocols, чтобы начать поиск')   
 bot.polling(True)
