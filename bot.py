@@ -2,7 +2,7 @@ import telebot
 from PIL import Image
 from urllib.request import urlopen
 import os
-from Task import Task
+from myqueue.task import task
 
 from dictionary_for_files import storageKey   #словарь 
 
@@ -12,7 +12,7 @@ token = os.environ.get('token')
 url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/arHUSXBmA5Y.jpg?size=527x505&quality=96&proxy=1&sign=3103cde7044a879a6d8e76a5b8ab2d62&type=album"
 
 bot = telebot.TeleBot(token)
-run=Task()
+run=task()
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
