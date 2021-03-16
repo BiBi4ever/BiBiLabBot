@@ -40,9 +40,9 @@ def exchange_command(message):
             bot.register_next_step_handler(send,keys)
          
         elif call1.data == 'button':
-            reply= types.ReplyKeybordMarkup(resize_keybord = True)
-            PCR_id= types.KeyboardButton("ПЦР")
-            protein_id= types.KeyboardButton("Белки")
+            reply= telebot.types.ReplyKeybordMarkup(resize_keybord = True)
+            PCR_id= telebot.types.KeyboardButton("ПЦР")
+            protein_id= telebot.types.KeyboardButton("Белки")
             
             reply.add( PCR_id, protein_id)
             bot.send_message(call1.message.chat.id, "Выберите нужный вариант", reply_markup = reply)            
