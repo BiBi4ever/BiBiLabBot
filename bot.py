@@ -28,8 +28,8 @@ def help_message(message):
 def exchange_command(message):
     keyboard = telebot.types.InlineKeyboardMarkup()
     keyboard.row(
-        telebot.types.KeyboardButton('Поиск по ключу', callback_data='key'),
-        telebot.types.KeyboardButton('Поиск с кнопками',callback_data='button'))
+        telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
+        telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
 
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
