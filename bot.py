@@ -28,8 +28,8 @@ def help_message(message):
 def exchange_command(message):
     keyboard = telebot.types.InlineKeyboardMarkup()
     keyboard.row(
-        telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
-        telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
+        telebot.types.KeyboardButton('Поиск по ключу', callback_data='key'),
+        telebot.types.KeyboardButton('Поиск с кнопками',callback_data='button'))
     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
 
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
@@ -41,8 +41,8 @@ def exchange_command(message):
          
         elif call1.data == 'button':
             reply= types.ReplyKeybordMarkup(resize_keybord = True)
-            PCR= types.KeyboaedButton("ПЦР")
-            protein= types.KeyboaedButton("Белки")
+            PCR= types.KeyboardButton("ПЦР")
+            protein= types.KeyboardButton("Белки")
             
             reply.add( PCR, protein)
             client.send_message(call1.message.chat.id, 'Выберите нужный вариант")
