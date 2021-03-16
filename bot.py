@@ -44,7 +44,7 @@ def exchange_command(message):
             keyboard1.row(
                 telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
                 telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'))
-            bot.send_message(call1.message.chat.id, call1.message.message_id 'Выберите нужный вариант:', reply_markup=keyboard1)
+            bot.send_message(call1.message.chat.id, call1.message.message_id, 'Выберите нужный вариант:', reply_markup=keyboard1)
          
     @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
     def query_handler2(call2):
