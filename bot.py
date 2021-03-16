@@ -5,10 +5,6 @@ import os
 
 from dictionary_for_files import storageKey   #словарь 
 
-import telebot
-from PIL import Image
-import os
-
 token = os.environ.get('token')
 
 #картинка
