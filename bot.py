@@ -51,7 +51,7 @@ def exchange_command(message):
             bot.send_message(call2.message.chat.id, ' ', reply_markup=keyboard2) 
                  
 def keys(message):
-    if message == "protocols":
+    if message == "/protocols":
         bot.send_message(message.from_user.id, "oh no, Чтобы начать новый поиск, нажмите /protocols")
     dickt = storageKey 
     found_links=[]
