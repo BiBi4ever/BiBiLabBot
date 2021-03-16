@@ -2,10 +2,12 @@ import telebot
 from PIL import Image
 from urllib.request import urlopen
 import os
-import pickle 
+import ast
+from google.oauth2 import service_account
+from googleapiclient.http import MediaIoBaseDownload,MediaFileUpload
 from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
+import ast
+
 from dictionary_for_files import storage   #словарь 
 
 token = os.environ.get('token')
@@ -92,4 +94,11 @@ def send_first_message(message):
 
 bot.polling(True)
 
-SCOPES = ['https://www.googleapis.com/auth/drive'] #делать всякое разное с диском(
+SCOPES = ['https://www.googleapis.com/auth/drive']
+ID = os.environ.get('key')
+credentials = service_account.Credentials.from_service_account_file(
+        ast.literal_eval(ID), scopes=SCOPES)
+service = build('drive', 'v3', credentials=credentials)
+results = service.files().list(pageSize=10,
+                               fields="nextPageToken, files(id, name, mimeType)").execute()
+
