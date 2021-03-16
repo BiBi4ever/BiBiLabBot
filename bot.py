@@ -28,11 +28,11 @@ def help_message(message):
 def exchange_command(message):
     global isRunning
     if not isRunning:
-    keyboard = telebot.types.InlineKeyboardMarkup().row(
-        telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
-        telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
-    bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
-    isRunning = True
+         keyboard = telebot.types.InlineKeyboardMarkup().row(
+                  telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
+                  telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
+         bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
+         isRunning = True
 
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
