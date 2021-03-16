@@ -40,11 +40,14 @@ def exchange_command(message):
             bot.register_next_step_handler(send,keys)
          
         elif call1.data == 'button':
-            keyboard1 = telebot.types.InlineKeyboardMarkup()
-            keyboard1.row(
-                telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
-                telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'))
-            bot.send_message(call1.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard1)
+            reply= types.ReplyKeybordMarkup(resize_keybord = True)
+            PCR= types.KeyboaedButton("Работа с ПЦР")
+            protein= types.KeyboaedButton("Работа с нуклеиновыми кислотами")
+            
+            reply.add( PCR, protein)
+            client.send_message(call1.message.chat.id, 'Выберите нужный вариант")
+                                
+                                
     @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
     def query_handler2(call2):
         if call2.data == 'acid':
