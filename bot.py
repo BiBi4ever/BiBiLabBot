@@ -64,6 +64,6 @@ def keys(message):
                                  'Совпадений не найдено. Попробуй ввести другое слово, например: ДНК')
         bot.register_next_step_handler(send_me, keys)
         return
-    sen_me = bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\U0001F50E Чтобы начать новый поиск, нажми /protocols')
+    send_me = bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\U0001F50E Чтобы начать новый поиск, нажми /protocols')
     
 bot.polling(True)
