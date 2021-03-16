@@ -24,7 +24,7 @@ def exchange_command(message):
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
         if call1.data == 'key':
-            send = bot.send_message(chat_id=call1.message.chat.id, text='Введи слово')
+            send = bot.send_message(chat_id=call1.message.chat.id, text='Введите слово')
             bot.register_next_step_handler(send,keys)
          
         elif call1.data == 'button':
@@ -51,13 +51,13 @@ def exchange_command(message):
             bot.send_message(call2.message.chat.id, ' ', reply_markup=keyboard2) 
                  
 def keys(message):
+    if message == "protocols":
+        bot.send_message(message.from_user.id, "oh no, Чтобы начать новый поиск, нажмите /protocols")
     dickt = storageKey 
     found_links=[]
     for i in dickt:
         if message.text.lower() in i:
             found_links.append(storageKey[i])
-    if message == "/protocols":
-        bot.send_message(message.from_user.id, "oh no, Чтобы начать новый поиск, нажмите /protocols")
     if len(found_links) <= 0:
         send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК')
