@@ -5,4 +5,4 @@ telebot
 boto3
 Pillow
 ast
-google-api-python-client
+google-api-python-client == 2.0.2
