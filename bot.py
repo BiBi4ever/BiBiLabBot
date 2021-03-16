@@ -41,8 +41,8 @@ def exchange_command(message):
          
         elif call1.data == 'button':
             reply= types.ReplyKeybordMarkup(resize_keybord = True)
-            PCR= types.KeyboaedButton("Работа с ПЦР")
-            protein= types.KeyboaedButton("Работа с нуклеиновыми кислотами")
+            PCR= types.KeyboaedButton("ПЦР")
+            protein= types.KeyboaedButton("Белки")
             
             reply.add( PCR, protein)
             client.send_message(call1.message.chat.id, 'Выберите нужный вариант")
