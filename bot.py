@@ -26,16 +26,18 @@ def help_message(message):
 # Команда для работы с протоколами, если пользователь выбирает поиск по ключу (вызов key), он вводит слова для протокола сам, если выбирает кнопку (вызов button) - тыкает на варианты
 @bot.message_handler(commands=['protocols'])
 def exchange_command(message):
-    keyboard = telebot.types.InlineKeyboardMarkup()
-    keyboard.row(
+    global isRunning
+    if not isRunning:
+    keyboard = telebot.types.InlineKeyboardMarkup().row(
         telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
         telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
+    isRunning = True
 
+    @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
         if call1.data == 'key':
-            # поиск по ключу, см. функцию ниже:
-            send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи ключевое слово')
+            send = bot.edit_message_text(chat_id=call1.message.chat.id, text='Введи ключевое слово')
             bot.register_next_step_handler(send,keys)
          
         elif call1.data == 'button':
@@ -44,7 +46,7 @@ def exchange_command(message):
                 telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
                 telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'))
             bot.send_message(call1.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard1)
-         
+            
     @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
     def query_handler2(call2):
         if call2.data == 'acid':
@@ -63,6 +65,7 @@ def exchange_command(message):
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
             bot.send_message(call2.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2) 
+        isRunning = False
                   
 def keys(message):
     list = [*storageKey]
