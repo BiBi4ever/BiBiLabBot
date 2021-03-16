@@ -66,4 +66,4 @@ def keys(message):
                                  'Совпадений не найдено. Попробуй ввести другое слово, например: ДНК')
         bot.register_next_step_handler(send_me, keys)
         return
-   bot.pollin()
+   bot.polling()
