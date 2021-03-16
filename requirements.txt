@@ -5,5 +5,4 @@ telebot
 boto3
 Pillow
 ast
-google.oauth2
-googleapiclient.http
+google-api-python-client
