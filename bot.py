@@ -5,6 +5,10 @@ import os
 
 from dictionary_for_files import storageKey   #словарь 
 
+import telebot
+from PIL import Image
+import os
+
 token = os.environ.get('token')
 
 #картинка
@@ -12,24 +16,14 @@ url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/a
 
 bot = telebot.TeleBot(token)
 
-@bot.message_handler(commands=['start'])
-def send_welcome(message):
-         bot.reply_to(message, f'Hello you, {message.from_user.first_name}!\U0001F44B\nЯ бот, облегчающий работу в лаборатории. Чтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')
-                               #ПРОШУ ОСТАВИТЬ ПРИВЕТСВИЕ, ЧТОБЫ НЕ БЫЛО СЛИШКОМ СУХО 
-@bot.message_handler(commands=['help'])
-def help_message(message):
-    bot.send_message(message.chat.id, ' С моей помощью ты можешь увидеть протоколы для '
-                                      'работы с нуклеиновыми кислотами, обратной транскрипции и '
-                                      'ПЦР.\n\n' 
-                     'Чтобы найти нужный протокол, нажми /protocols. Выбирай поиск с кнопками или воспользуйся поиском по ключу - введи ключевое слово.'
-)
+
 # Команда для работы с протоколами, если пользователь выбирает поиск по ключу (вызов key), он вводит слова для протокола сам, если выбирает кнопку (вызов button) - тыкает на варианты
 @bot.message_handler(commands=['protocols'])
 def exchange_command(message):
-     keyboard = telebot.types.InlineKeyboardMarkup().row(
-              telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key')
-              telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
-     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard
+    keyboard = telebot.types.InlineKeyboardMarkup().row(
+        telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
+        telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
+    bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
 
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
@@ -62,9 +56,9 @@ def exchange_command(message):
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
             bot.send_message(call2.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2) 
-                  
+                 
 def keys(message):
-    list = [*storageKey]
+    list = [storageKey]
     found_links = []
     for i in list:
         if message.text.lower() in i:
@@ -75,4 +69,5 @@ def keys(message):
         send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуй ввести другое слово, например: ДНК')
         bot.register_next_step_handler(send_me, keys)
+        return
 bot.polling(True)
