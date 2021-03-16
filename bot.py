@@ -24,7 +24,7 @@ def exchange_command(message):
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
         if call1.data == 'key':
-            send = bot.edit_message_text(chat_id=call1.message.chat.id, text='Введи ключевое слово')
+            send = bot.send_message(chat_id=call1.message.chat.id, text='Введи слово')
             bot.register_next_step_handler(send,keys)
          
         elif call1.data == 'button':
@@ -66,4 +66,4 @@ def keys(message):
                                  'Совпадений не найдено. Попробуй ввести другое слово, например: ДНК')
         bot.register_next_step_handler(send_me, keys)
         return
-bot.polling(True)
+   bot.pollin()
