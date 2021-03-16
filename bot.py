@@ -56,8 +56,8 @@ def keys(message):
     for i in dickt:
         if message.text.lower() in i:
             found_links.append(storageKey[i])
-    if message == "\protocols":
-        bot.send_message(message.from_user.id, "oh no, Чтобы начать новый поиск, нажмите /protocols")
+    if message == "/protocols":
+        bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
     if len(found_links) <= 0:
         send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК')
