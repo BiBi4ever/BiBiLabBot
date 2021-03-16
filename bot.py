@@ -11,6 +11,7 @@ token = os.environ.get('token')
 url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/arHUSXBmA5Y.jpg?size=527x505&quality=96&proxy=1&sign=3103cde7044a879a6d8e76a5b8ab2d62&type=album"
 
 bot = telebot.TeleBot(token)
+run=Run()
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -26,13 +27,12 @@ def help_message(message):
 # Команда для работы с протоколами, если пользователь выбирает поиск по ключу (вызов key), он вводит слова для протокола сам, если выбирает кнопку (вызов button) - тыкает на варианты
 @bot.message_handler(commands=['protocols'])
 def exchange_command(message):
-    global isRunning
-    if not isRunning:
+    if not run.isRunning:
          keyboard = telebot.types.InlineKeyboardMarkup().row(
                   telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
                   telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
          bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
-         isRunning = True
+         run.isRunning = True
 
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
@@ -65,7 +65,7 @@ def exchange_command(message):
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
             bot.send_message(call2.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2) 
-        isRunning = False
+        run.isRunning = False
                   
 def keys(message):
     list = [*storageKey]
