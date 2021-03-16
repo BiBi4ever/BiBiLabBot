@@ -14,8 +14,8 @@ bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-         bot.reply_to(message, f'హలో, {message.from_user.first_name}!\U0001F44B\nЯ бот, облегчающий работу в лаборатории. Чтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')
-                               
+         bot.reply_to(message, f'Hello you, {message.from_user.first_name}!\U0001F44B\nЯ бот, облегчающий работу в лаборатории. Чтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')
+                               #ПРОШУ ОСТАВИТЬ ПРИВЕТСВИЕ, ЧТОБЫ НЕ БЫЛО СЛИШКОМ СУХО 
 @bot.message_handler(commands=['help'])
 def help_message(message):
     bot.send_message(message.chat.id, ' С моей помощью ты можешь увидеть протоколы для '
@@ -31,6 +31,7 @@ def exchange_command(message):
         telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
         telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
+    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
 
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
@@ -40,13 +41,12 @@ def exchange_command(message):
             bot.register_next_step_handler(send,keys)
          
         elif call1.data == 'button':
-            reply= telebot.types.ReplyKeybordMarkup(resize_keybord = True)
-            PCR_id= telebot.types.KeyboardButton("ПЦР")
-            protein_id= telebot.types.KeyboardButton("Белки")
-            
-            reply.add( PCR_id, protein_id)
-            bot.send_message(call1.message.chat.id, "Выберите нужный вариант", reply_markup = reply)            
-                                
+            keyboard1 = telebot.types.InlineKeyboardMarkup()
+            keyboard1.row(
+                telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
+                telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'))
+            bot.send_message(call1.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard1)
+                  
     @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
     def query_handler2(call2):
         if call2.data == 'acid':
