@@ -36,15 +36,15 @@ def exchange_command(message):
     def query_handler(call1):
         if call1.data == 'key':
             # поиск по ключу, см. функцию ниже:
-            bot.send_message(call1.message.chat.id, text='Введи ключевое слово')
-            bot.register_next_step_handler(send,keys)
+            bot.send_message(call1.message.chat.id, call1.message.message_id, text='Введи ключевое слово')
+            bot.register_next_step_handler(keys)
          
         elif call1.data == 'button':
             keyboard1 = telebot.types.InlineKeyboardMarkup()
             keyboard1.row(
                 telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
                 telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'))
-            bot.send_message(call1.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard1)
+            bot.send_message(call1.message.chat.id, call1.message.message_id 'Выберите нужный вариант:', reply_markup=keyboard1)
          
     @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
     def query_handler2(call2):
@@ -56,7 +56,6 @@ def exchange_command(message):
                     telebot.types.InlineKeyboardButton('Выделение РНК ', url='https://drive.google.com/file/d/1mzLZRFX3hDsQpm18QD_op8mg89E29Z-P/view'),
                     telebot.types.InlineKeyboardButton('Обратная транскрипция', url='https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view'))
             bot.send_message(call2.message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard2)
-            bot.edit_message_reply_markup(call2.message.chat.id, call2.message.message_id)
                   
         elif call2.data == 'PCR':
             keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2)
