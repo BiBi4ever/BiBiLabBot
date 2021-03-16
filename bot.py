@@ -36,7 +36,7 @@ def exchange_command(message):
     def query_handler(call1):
         if call1.data == 'key':
             # поиск по ключу, см. функцию ниже:
-            send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи ключевое слово')
+            send = bot.edit_message_text(chat_id=call1.message.chat.id, text='Введи ключевое слово')
             bot.register_next_step_handler(send,keys)
          
         elif call1.data == 'button':
