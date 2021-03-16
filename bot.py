@@ -31,7 +31,7 @@ def exchange_command(message):
         telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
         telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
-    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
+    bot.edit_message_reply_markup(message.chat.id, message.message_id)
 
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
