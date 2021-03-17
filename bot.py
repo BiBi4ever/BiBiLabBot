@@ -13,47 +13,63 @@ url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/a
 bot = telebot.TeleBot(token)
 
 
+keyboard = telebot.types.InlineKeyboardMarkup().add(
+        telebot.types.InlineKeyboardButton(bottom_titles[0],callback_data=callback_data_keyboard[bottom_titles[0]]),
+        telebot.types.InlineKeyboardButton(bottom_titles[1],callback_data=callback_data_keyboard[bottom_titles[1]]))
+
+keyboard1 = telebot.types.InlineKeyboardMarkup().add(
+            telebot.types.InlineKeyboardButton(bottom_titles1[0],callback_data=callback_data_keyboard1[bottom_titles1[0]]),
+            telebot.types.InlineKeyboardButton(bottom_titles1[1],callback_data=callback_data_keyboard1[bottom_titles1[1]]),
+            telebot.types.InlineKeyboardButton(bottom_titles1[2],callback_data=callback_data_keyboard1[bottom_titles1[2]]))
+
+keyboard2 = telebot.types.InlineKeyboardMarkup().add(
+            telebot.types.InlineKeyboardButton(bottom_titles2[0],callback_data=callback_data_keyboard2[bottom_titles2[0]]),
+            telebot.types.InlineKeyboardButton(bottom_titles2[1],callback_data=callback_data_keyboard2[bottom_titles2[1]]),
+            telebot.types.InlineKeyboardButton(bottom_titles2[2],callback_data=callback_data_keyboard2[bottom_titles2[2]]),
+            telebot.types.InlineKeyboardButton(bottom_titles2[3],callback_data=callback_data_keyboard2[bottom_titles2[3]]),
+            telebot.types.InlineKeyboardButton(bottom_titles2[4],callback_data=callback_data_keyboard2[bottom_titles2[4]]))
+
+keyboard3 = telebot.types.InlineKeyboardMarkup().add(
+            telebot.types.InlineKeyboardButton(bottom_titles3[0],callback_data=callback_data_keyboard3[bottom_titles3[0]]),
+            telebot.types.InlineKeyboardButton(bottom_titles3[1],callback_data=callback_data_keyboard3[bottom_titles3[1]]),
+            telebot.types.InlineKeyboardButton(bottom_titles3[2],callback_data=callback_data_keyboard3[bottom_titles3[2]]),
+            telebot.types.InlineKeyboardButton(bottom_titles3[3],callback_data=callback_data_keyboard3[bottom_titles3[3]]))
+
+bottom_titles=[key for key in callback_data_keyboard]
+bottom_titles1=[key for key in callback_data_keyboard1]
+bottom_titles2=[key for key in callback_data_keyboard2]
+bottom_titles3=[key for key in callback_data_keyboard3]
+
 #Ключ или кнопки
 @bot.message_handler(commands=['protocols'])
-def exchange_command(message):
-    keyboard = telebot.types.InlineKeyboardMarkup().row(
-        telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
-        telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
+def callback_handler(message):    
     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
 
-    #Обработка тыка на ключ или на кнопки
-    @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
+    @bot.callback_query_handler(func=lambda call1: call1.data==callback_query_handler)
     def query_handler(call1):
+        query = update.callback_query
+        data = query.data
+        
         if call1.data == 'key':
             send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи слово')
             bot.register_next_step_handler(send,keys)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
          
         elif call1.data == 'button':
-            keyboard1 = telebot.types.InlineKeyboardMarkup().row(
-                telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
-                telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'),
-                telebot.types.InlineKeyboardButton('Назад', callback_data='back'))
-            bot.edit_message_text(text='Выберите нужный вариант', reply_markup=keyboard1)
+            query.edit_message_text(text='Выберите нужный вариант', reply_markup=keyboard1)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
             
-    @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
+    @bot.callback_query_handler(func=lambda call2: call2.data==callback_query_handler1)
     def query_handler2(call2):
+        query = update.callback_query
+        data = query.data
+        
         if call2.data == 'acid':
-            keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2).add(
-                    telebot.types.InlineKeyboardButton('Выделение ДНК по Хомчински', url='https://drive.google.com/file/d/1DmogZzc5-vEgDxxqiCB4sC3wHOb9KYHc/view?usp=sharing'),
-                    telebot.types.InlineKeyboardButton('Выделение ДНК на магнитах', url='https://drive.google.com/file/d/1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd/view?usp=sharing'),
-                    telebot.types.InlineKeyboardButton('Выделение РНК ', url='https://drive.google.com/file/d/1mzLZRFX3hDsQpm18QD_op8mg89E29Z-P/view'),
-                    telebot.types.InlineKeyboardButton('Обратная транскрипция', url='https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view'))
-            bot.edit_message_text(call2.message.chat.id, 'Выберите нужный вариант', reply_markup=keyboard2)
+            query.edit_message_text('Выберите нужный вариант', reply_markup=keyboard2)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
                   
         elif call2.data == 'PCR':
-            keyboard3 = telebot.types.InlineKeyboardMarkup(row_width=2).add(
-                telebot.types.InlineKeyboardButton('Обычная ПЦР', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/1.png'),
-                telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
-                telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
-            bot.edit_message_text(call2.message.chat.id, 'Выберите нужный вариант', reply_markup=keyboard3) 
+            query.edit_message_text('Выберите нужный вариант', reply_markup=keyboard3) 
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам     
                 
                 
