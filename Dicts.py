@@ -5,10 +5,10 @@ callback_query_handler={'Поиск по ключу':'key',
 
 callback_query_handler1={'Работа с нуклеиновыми кислотами':'acid',
                         'Работа с ПЦР':'PCR',
-                        'Назад':'back1'}
+                        'Назад':'back'}
                          
-callback_query_handler2={'Назад':'back2',
-                        'Назад ':'back3'}
+callback_query_handler2={'Назад':'back1',
+                        'Назад ':'back2'}
 
 callback_data_keyboard_Acid={'Выделение ДНК по Хомчински':'https://drive.google.com/file/d/1DmogZzc5-vEgDxxqiCB4sC3wHOb9KYHc/view?usp=sharing',
                              'Выделение ДНК на магнитах':'https://drive.google.com/file/d/1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd/view?usp=sharing',
