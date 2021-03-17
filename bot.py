@@ -4,7 +4,7 @@ from urllib.request import urlopen
 import os
 
 from dictionary_for_files import storageKey   #словарь 
-from Dicts import keyboard, keyboard1, keyboard2, keyboard3
+from Dicts import keyboard, keyboard1, keyboard2, keyboard3, callback_query_handler, callback_query_handler1, callback_query_handler2
 
 token = os.environ.get('token')
 
@@ -18,7 +18,7 @@ bot = telebot.TeleBot(token)
 def callback_handler(message):    
     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
     
-    @bot.callback_query_handler(func=lambda call1: call1.data in [value for value in callback_data_keyboard.values()])
+    @bot.callback_query_handler(func=lambda call1: call1.data in [value for value in callback_query_handler.values()])
     def query_handler(call1):
         if call1.data == 'key':
             send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введите слово')
@@ -28,7 +28,7 @@ def callback_handler(message):
             bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard1)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
             
-    @bot.callback_query_handler(func=lambda call2: call2.data in [value for value in callback_data_keyboard1.values()])
+    @bot.callback_query_handler(func=lambda call2: call2.data in [value for value in callback_query_handler1.values()])
     def query_handler1(call2):
         query = update.callback_query
         data = query.data
@@ -44,7 +44,7 @@ def callback_handler(message):
         elif call2.data == 'back':
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard)
         
-    @bot.callback_query_handler(func=lambda call3: call3.data in ['back1', 'back2'] )
+    @bot.callback_query_handler(func=lambda call3: call3.data in [value for value in callback_query_handler2.values()] )
     def query_handler2(call3):
         if call3.data == 'back1':
             bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard1)
