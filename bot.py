@@ -30,13 +30,6 @@ def send_first_message(message):
     greet = ['hello','hi','привет', 'здравствуй']
     if any(greetings in message.text.lower() for greetings in greet):
         bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал')
-
-#бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
-    else:
-        img = Image.open(urlopen(url))
-        bot.send_photo(message.chat.id, img)
-        img.close()
-        bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
     
 #Ключ или кнопки
 @bot.message_handler(commands=['protocols'])
@@ -73,7 +66,14 @@ def callback_handler(message):
         elif call3.data == 'back2':
             bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard1)
                 
-                
+#бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
+    else:
+        img = Image.open(urlopen(url))
+        bot.send_photo(message.chat.id, img)
+        img.close()
+        bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
+         
+         
 def keys(message):
     dickt = storageKey 
     found_links=[]
