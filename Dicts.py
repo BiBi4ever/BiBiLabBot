@@ -1,3 +1,5 @@
+import telebot
+
 callback_query_handler={'Поиск по ключу':'key',
                         'Поиск с кнопками':'button'}
 
