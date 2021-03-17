@@ -29,12 +29,13 @@ def exchange_command(message):
             bot.register_next_step_handler(send,keys)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
          
-        elif call1.data == 'button':
+         elif call1.data == 'button':
             keyboard1 = telebot.types.InlineKeyboardMarkup().row(
                 telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
                 telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'),
                 telebot.types.InlineKeyboardButton('Назад', callback_data='back'))
-            bot.edit_message_text(text='Выберите нужный вариант', reply_markup=keyboard1)
+            bot.deleteMessage(call1.message.chat_id, call1.message.message_id);
+            bot.send_message(call1.message.chat_id, text='Выберите нужный вариант:', reply_markup=keyboard1)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
             
     @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
