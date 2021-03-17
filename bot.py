@@ -4,6 +4,7 @@ from urllib.request import urlopen
 import os
 
 from dictionary_for_files import storageKey   #словарь 
+from Dicts import callback_data_keyboard, callback_data_keyboard1, callback_data_keyboard2, callback_data_keyboard3
 
 token = os.environ.get('token')
 
