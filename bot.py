@@ -25,7 +25,7 @@ def exchange_command(message):
     @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
     def query_handler(call1):
         if call1.data == 'key':
-            send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи слово')
+            send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введите слово')
             bot.register_next_step_handler(send,keys)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
         elif call1.data == 'button':
@@ -36,7 +36,7 @@ def exchange_command(message):
             bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard1)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
             
-    @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
+    @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR', 'back'] )
     def query_handler2(call2):
         if call2.data == 'acid':
             keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2).add(
@@ -53,7 +53,11 @@ def exchange_command(message):
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, 'Выберите нужный вариант', reply_markup=keyboard3) 
-            #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам      
+            #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам  
+            
+        elif call2.data == 'back':
+            sends= bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Выберите нужный вариант:')
+            bot.register_next_step_handler(sends,query_handler)
                 
                 
 def keys(message):
