@@ -56,8 +56,7 @@ def exchange_command(message):
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам  
             
         elif call2.data == 'back':
-            sends= bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Выберите нужный вариант:')
-            bot.register_next_step_handler(sends,query_handler)
+            sends= bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard)
                 
                 
 def keys(message):
