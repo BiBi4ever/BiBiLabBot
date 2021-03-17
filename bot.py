@@ -33,7 +33,7 @@ def exchange_command(message):
             keyboard1 = telebot.types.InlineKeyboardMarkup().row(
                 telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
                 telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'))
-            bot.edit_message_text(call1.message.chat.id, 'Выберите нужный вариант':, reply_markup=keyboard1)
+            bot.edit_message_text(call1.message.chat.id, 'Выберите нужный вариант', reply_markup=keyboard1)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
             
     @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
