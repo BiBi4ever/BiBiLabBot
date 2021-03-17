@@ -60,7 +60,7 @@ def keys(message):
             found_links.append(storageKey[i])
     if len(found_links) <= 0:
         send_me = bot.send_message(message.from_user.id,
-                                 text= message)
+                                 text= 'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
         bot.register_next_step_handler(send_me, keys)
         return
     send_me = bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\U0001F50E Чтобы начать новый поиск, нажмите /protocols')
