@@ -58,14 +58,14 @@ def exchange_command(message):
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам  
             
         elif call2.data == 'back':
-            sends= bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard)
+            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard)
         
     @bot.callback_query_handler(func=lambda call3: call3.data in ['back1', 'back2'] )
     def query_handler3(call3):
         if call3.data == 'back1':
-            sends= bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard1)
+            bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard1)
         elif call3.data == 'back2':
-            sends= bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard1)
+            bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard1)
             
 def keys(message):
     dickt = storageKey 
