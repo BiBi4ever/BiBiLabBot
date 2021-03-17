@@ -43,7 +43,8 @@ def exchange_command(message):
                     telebot.types.InlineKeyboardButton('Выделение ДНК по Хомчински', url='https://drive.google.com/file/d/1DmogZzc5-vEgDxxqiCB4sC3wHOb9KYHc/view?usp=sharing'),
                     telebot.types.InlineKeyboardButton('Выделение ДНК на магнитах', url='https://drive.google.com/file/d/1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd/view?usp=sharing'),
                     telebot.types.InlineKeyboardButton('Выделение РНК ', url='https://drive.google.com/file/d/1mzLZRFX3hDsQpm18QD_op8mg89E29Z-P/view'),
-                    telebot.types.InlineKeyboardButton('Обратная транскрипция', url='https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view'))
+                    telebot.types.InlineKeyboardButton('Обратная транскрипция', url='https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view'),
+                    telebot.types.InlineKeyboardButton('Назад', callback_data='back1'))
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id,text='Выберите нужный вариант', reply_markup=keyboard2)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
                   
@@ -51,13 +52,18 @@ def exchange_command(message):
             keyboard3 = telebot.types.InlineKeyboardMarkup(row_width=2).add(
                 telebot.types.InlineKeyboardButton('Обычная ПЦР', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/1.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
-                telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
+                telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'),
+                telebot.types.InlineKeyboardButton('Назад', callback_data='back2'))
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id,text='Выберите нужный вариант', reply_markup=keyboard3) 
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам  
             
         elif call2.data == 'back':
             sends= bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard)
-                
+        
+    @bot.callback_query_handler(func=lambda call3: call3.data in ['back1', 'back2'] )
+    def query_handler3(call3):
+        if call3.data == 'back1' or call2.data == 'back':
+            sends= bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard2)
                 
 def keys(message):
     dickt = storageKey 
