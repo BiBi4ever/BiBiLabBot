@@ -31,7 +31,7 @@ def exchange_command(message):
             keyboard1 = telebot.types.InlineKeyboardMarkup().row(
                 telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
                 telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'))
-            bot.send_message(call1.message.chat.id, ' ', reply_markup=keyboard1)
+            bot.send_message(call1.message.chat.id, 'Выберите нужный вариант', reply_markup=keyboard1)
             
     @bot.callback_query_handler(func=lambda call2: call2.data in ['acid', 'PCR'] )
     def query_handler2(call2):
@@ -41,14 +41,14 @@ def exchange_command(message):
                     telebot.types.InlineKeyboardButton('Выделение ДНК на магнитах', url='https://drive.google.com/file/d/1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd/view?usp=sharing'),
                     telebot.types.InlineKeyboardButton('Выделение РНК ', url='https://drive.google.com/file/d/1mzLZRFX3hDsQpm18QD_op8mg89E29Z-P/view'),
                     telebot.types.InlineKeyboardButton('Обратная транскрипция', url='https://drive.google.com/file/d/1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-/view'))
-            bot.send_message(call2.message.chat.id, ' ', reply_markup=keyboard2)
+            bot.send_message(call2.message.chat.id, 'Выберите нужный вариант', reply_markup=keyboard2)
                   
         elif call2.data == 'PCR':
             keyboard2 = telebot.types.InlineKeyboardMarkup(row_width=2).add(
                 telebot.types.InlineKeyboardButton('Обычная ПЦР', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/1.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
-            bot.send_message(call2.message.chat.id, ' ', reply_markup=keyboard2) 
+            bot.send_message(call2.message.chat.id, 'Выберите нужный вариант', reply_markup=keyboard2) 
                  
 def keys(message):
     dickt = storageKey 
