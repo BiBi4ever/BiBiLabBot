@@ -51,17 +51,17 @@ def exchange_command(message):
             bot.send_message(call2.message.chat.id, ' ', reply_markup=keyboard2) 
                  
 def keys(message):
-    if message == "/protocols":
-        bot.send_message(message.from_user.id, "oh no, Чтобы начать новый поиск, нажмите /protocols")
     dickt = storageKey 
     found_links=[]
     for i in dickt:
         if message.text.lower() in i:
             found_links.append(storageKey[i])
     if len(found_links) <= 0:
-        send_me = bot.send_message(message.from_user.id,
-                                 text= 'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
-        bot.register_next_step_handler(send_me, keys)
-        return
+        if message == "\protocols":
+            bot.register_next_step_handler(bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard), exchange_command)
+            send_me = bot.send_message(message.from_user.id,
+                                 'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
+            bot.register_next_step_handler(send_me, keys)
+            return
     send_me = bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\U0001F50E Чтобы начать новый поиск, нажмите /protocols')
 bot.polling(True)
