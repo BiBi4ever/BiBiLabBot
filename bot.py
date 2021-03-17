@@ -62,10 +62,8 @@ def exchange_command(message):
         
     @bot.callback_query_handler(func=lambda call3: call3.data in ['back1', 'back2'] )
     def query_handler3(call3):
-        if call3.data == 'back1':
-            sends= bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard2)
-        elif call3.data == 'back2':
-            sends= bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard3)
+        if call3.data == 'back1' or call3.data == 'back2':
+            sends= bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Выберите нужный вариант:', reply_markup=keyboard1)
             
             
 def keys(message):
