@@ -52,7 +52,7 @@ def exchange_command(message):
                 telebot.types.InlineKeyboardButton('Обычная ПЦР', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/1.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР с зондами', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png'),
                 telebot.types.InlineKeyboardButton('Реал тайм ПЦР на sybr green', url='https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'))
-            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, 'Выберите нужный вариант', reply_markup=keyboard3) 
+            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id,'Выберите нужный вариант', reply_markup=keyboard3) 
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам  
             
         elif call2.data == 'back':
@@ -70,6 +70,6 @@ def keys(message):
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
         bot.register_next_step_handler(send_me, keys)
         return
-    send_me = bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\U0001F50E Чтобы начать новый поиск, нажмите /protocols')
+    send_me = bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\ Чтобы начать новый поиск, нажмите /protocols')
 
 bot.polling(True)
