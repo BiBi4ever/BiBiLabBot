@@ -30,15 +30,12 @@ def callback_handler(message):
             
     @bot.callback_query_handler(func=lambda call2: call2.data in [value for value in callback_query_handler1.values()])
     def query_handler1(call2):
-        query = update.callback_query
-        data = query.data
-        
         if call2.data == 'acid':
-            query.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Выберите нужный вариант', reply_markup=keyboard2)
+            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Выберите нужный вариант', reply_markup=keyboard2)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
                   
         elif call2.data == 'PCR':
-            query.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Выберите нужный вариант', reply_markup=keyboard3) 
+            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Выберите нужный вариант', reply_markup=keyboard3) 
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам 
     
         elif call2.data == 'back':
