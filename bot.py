@@ -28,8 +28,7 @@ def exchange_command(message):
             send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи слово')
             bot.register_next_step_handler(send,keys)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
-         
-         elif call1.data == 'button':
+        elif call1.data == 'button':
             keyboard1 = telebot.types.InlineKeyboardMarkup().row(
                 telebot.types.InlineKeyboardButton('Работа с нуклеиновыми кислотами', callback_data='acid'),
                 telebot.types.InlineKeyboardButton('Работа с ПЦР', callback_data='PCR'),
