@@ -23,13 +23,6 @@ def help_message(message):
                                       'работы с нуклеиновыми кислотами, обратной транскрипции и '
                                       'ПЦР.\n\n' 
                      'Чтобы найти нужный протокол, нажми /protocols. Выбирай поиск с кнопками или воспользуйся поиском по ключу и введи ключевое слово.')
-
-#Ответ на приветствие
-@bot.message_handler(content_types=['text'])
-def send_first_message(message):
-    greet = ['hello','hi','привет', 'здравствуй']
-    if any(greetings in message.text.lower() for greetings in greet):
-        bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал')
     
 #Ключ или кнопки
 @bot.message_handler(commands=['protocols'])
@@ -65,7 +58,13 @@ def callback_handler(message):
             bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard1)
         elif call3.data == 'back2':
             bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard1)
-                
+
+#Ответ на приветствие
+@bot.message_handler(content_types=['text'])
+def send_first_message(message):
+    greet = ['hello','hi','привет', 'здравствуй']
+    if any(greetings in message.text.lower() for greetings in greet):
+        bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал')               
 #бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
     else:
         img = Image.open(urlopen(url))
