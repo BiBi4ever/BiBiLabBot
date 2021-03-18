@@ -77,19 +77,22 @@ def send_first_message(message):
 def keys(message):
     dickt = storageKey 
     found_links=[]
-    for i in dickt:
-        if message.text.lower() in i:
-            found_links.append(storageKey[i])
     if message == '/protocols':
         return bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
-    
-    elif len(found_links) <= 0:
+    else:
+        for i in dickt:
+            if message.text.lower() in i:
+                found_links.append(storageKey[i])
+                
+    if len(found_links) <= 0:
         send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
         bot.register_next_step_handler(send_me, keys)
     
     elif len(found_links) > 0:
         bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n Чтобы начать новый поиск, нажмите /protocols')
+        
+        
         
         
     
