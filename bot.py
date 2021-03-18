@@ -4,7 +4,7 @@ from urllib.request import urlopen
 import os
 
 from dictionary_for_files import storageKey   #словарь 
-from Dicts import keyboard, keyboard1, keyboard2, keyboard3, callback_query_handler, callback_query_handler1, callback_query_handler2
+from Dicts import keyboard_for_buttons, keyboard_for_buttons1, keyboard_for_buttons2, keyboard_for_buttons3, callback_query_handler, callback_query_handler1, callback_query_handler2
 
 token = os.environ.get('token')
 
@@ -27,7 +27,7 @@ def help_message(message):
 #Ключ или кнопки
 @bot.message_handler(commands=['protocols'])
 def callback_handler(message):    
-    bot.send_message(message.chat.id, 'Можешь выбрать нужный вариант', reply_markup=keyboard)
+    bot.send_message(message.chat.id, 'Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons)
     
     @bot.callback_query_handler(func=lambda call1: call1.data in [value for value in callback_query_handler.values()])
     def query_handler(call1):
@@ -36,28 +36,28 @@ def callback_handler(message):
             bot.register_next_step_handler(send,keys)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
         elif call1.data == 'button':
-            bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard1)
+            bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
             
     @bot.callback_query_handler(func=lambda call2: call2.data in [value for value in callback_query_handler1.values()])
     def query_handler1(call2):
         if call2.data == 'acid':
-            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard2)
+            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons2)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
                   
         elif call2.data == 'PCR':
-            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard3) 
+            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons3) 
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам 
     
         elif call2.data == 'back':
-            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard)
+            bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons)
         
     @bot.callback_query_handler(func=lambda call3: call3.data in [value for value in callback_query_handler2.values()] )
     def query_handler2(call3):
         if call3.data == 'back1':
-            bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard1)
+            bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
         elif call3.data == 'back2':
-            bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard1)
+            bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
 
 #Ответ на приветствие
 @bot.message_handler(content_types=['text'])
@@ -89,7 +89,7 @@ def keys(message):
     if len(found_links) <= 0:
         send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
-        bot.register_next_step_handler(send_me, callback_handler)
+        bot.register_next_step_handler(send_me, keys )
     
     elif len(found_links) > 0:
         bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n Чтобы начать новый поиск, нажмите /protocols')
