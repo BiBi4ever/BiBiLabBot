@@ -56,8 +56,6 @@ def callback_handler(message):
     def query_handler2(call3):
         if call3.data == 'back1':
             bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
-        elif call3.data == 'back2':
-            bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
 
 #Ответ на приветствие
 @bot.message_handler(content_types=['text'])
