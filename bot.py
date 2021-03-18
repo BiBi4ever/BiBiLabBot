@@ -78,7 +78,9 @@ def keys(message):
     dickt = storageKey 
     found_links=[]
     if message == '/protocols':
-        return bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
+        link = bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
+        bot.register_next_step_handler(link, callback_handler)
+         
     else:
         for i in dickt:
             if message.text.lower() in i:
