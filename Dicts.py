@@ -18,8 +18,6 @@ callback_data_keyboard_PCR={'Обычная ПЦР':'',
                         'Реал тайм ПЦР с зондами': '',
                         'Реал тайм ПЦР на sybr green':''}
 
-List_keyboards_with_url = [keyboard_for_buttons2, keyboard_for_buttons3] 
-
 for i in callback_query_handler:
     button = telebot.types.InlineKeyboardButton([i],callback_data=callback_query_handler[i])
     keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(button)
@@ -35,6 +33,8 @@ for i in callback_data_keyboard_Acid:
 for i in callback_data_keyboard_PCR:
     button3 = telebot.types.InlineKeyboardButton([i], url=callback_data_keyboard_PCR[i])
     keyboard_for_buttons3 = telebot.types.InlineKeyboardMarkup().add(button3)
+
+List_keyboards_with_url = [keyboard_for_buttons2, keyboard_for_buttons3] 
     
 for i in range(len(List_keyboards_with_url)):
     button_back = telebot.types.InlineKeyboardButton([key for key in callback_query_handler2][0], callback_data=[values for values in callback_query_handler2.values()][0])
