@@ -38,5 +38,5 @@ keyboard_for_buttons3 = telebot.types.InlineKeyboardMarkup().add(
             telebot.types.InlineKeyboardButton([key for key in callback_data_keyboard_PCR][0],callback_data=[values for values in callback_data_keyboard_PCR.values()][0]),
             telebot.types.InlineKeyboardButton([key for key in callback_data_keyboard_PCR][1],callback_data=[values for values in callback_data_keyboard_PCR.values()][1]),
             telebot.types.InlineKeyboardButton([key for key in callback_data_keyboard_PCR][2],callback_data=[values for values in callback_data_keyboard_PCR.values()][2]),
-            telebot.types.InlineKeyboardButton([key for key in callback_query_handler2][1],callback_data=[values for values in callback_query_handler2.values()][1]))
+            telebot.types.InlineKeyboardButton([key for key in callback_query_handler2][0],callback_data=[values for values in callback_query_handler2.values()][0]))
 
