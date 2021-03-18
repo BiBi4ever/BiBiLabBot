@@ -81,7 +81,7 @@ def keys(message):
         if message.text.lower() in i:
             found_links.append(storageKey[i])
     if message == '/protocols':
-        bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
+        return bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
     
     elif len(found_links) <= 0:
         send_me = bot.send_message(message.from_user.id,
@@ -92,7 +92,5 @@ def keys(message):
         bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n Чтобы начать новый поиск, нажмите /protocols')
         
         
-    elif message == '/protocols':
-        bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
     
 bot.polling(True)
