@@ -19,7 +19,7 @@ callback_data_keyboard_PCR={'Обычная ПЦР':'https://s.tcdn.co/ec5/c1b/e
                         'Реал тайм ПЦР на sybr green':'https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'}
 
 for i in callback_query_handler:
-    button = telebot.types.InlineKeyboardButton([i],callback_data=callback_query_handler[i])
+    button = telebot.types.InlineKeyboardButton(str([i]),callback_data=callback_query_handler[i])
     keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(button)
 
 keyboard_for_buttons1 = telebot.types.InlineKeyboardMarkup().add(
