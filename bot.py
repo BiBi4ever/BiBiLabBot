@@ -90,10 +90,12 @@ def send_first_message(message):
          
 def keys(message):
        results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
-         if results:
+       if results:
               for file in results.get('files', []):
-                     bot.send_document(service.files().get_media(fileId=file.get('id')))
-              bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n Чтобы начать новый поиск, нажмите /protocols')
+                     request = service.files().get_media(fileId=file.get('id'))
+                     fh = io.FileIO(file.get('name'), 'wb')
+                     bot.send_document(message.chat.id, fh)
+                     bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
          else:
               send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
