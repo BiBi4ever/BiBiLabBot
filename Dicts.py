@@ -26,8 +26,8 @@ keyboard_list_of_bottons3 = []
 
 for i in callback_query_handler:
     buttons.append(telebot.types.InlineKeyboardButton(i,callback_data=callback_query_handler[i]))
-keyboard_list_of_bottons.append(buttons)
-keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(keyboard_list_of_bottons)
+keyboard_list_of_buttons.append(buttons)
+keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(keyboard_list_of_buttons)
 
 keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(Key)
 
