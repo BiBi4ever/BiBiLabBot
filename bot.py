@@ -8,24 +8,16 @@ import json
 from googleapiclient.http import MediaIoBaseDownload,MediaFileUpload
 from googleapiclient.discovery import build
 import io
-
+from google_drive import authorization
 from dictionary_for_files import storageKey   #словарь 
 from Dicts import keyboard_for_buttons, keyboard_for_buttons1, keyboard_for_buttons2, keyboard_for_buttons3, callback_query_handler, callback_query_handler1, callback_query_handler2
 
-token = os.environ.get('token')
 
 #картинка
 url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/arHUSXBmA5Y.jpg?size=527x505&quality=96&proxy=1&sign=3103cde7044a879a6d8e76a5b8ab2d62&type=album"
 
-#гугл диск
-SCOPES = ['https://www.googleapis.com/auth/drive']
+token = os.environ.get('token')
 ID = json.loads(os.environ.get('key'))
-credentials = ServiceAccountCredentials.from_json_keyfile_dict(
-       ID, scopes=SCOPES)
-service = build('drive', 'v3', credentials=credentials)
-
-
-
 
 bot = telebot.TeleBot(token)
 
@@ -88,15 +80,16 @@ def send_first_message(message):
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
  
 
-
+#отправка файла в чатик
 def send(filename, message):
        with open(filename, 'rb') as f:
               bot.send_document(message.chat.id, f)
-              f1.close()
+              f.close()
        
  
 
 def keys(message):
+       service = authorization(ID)
        results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
        if  results.get('files', []):
               for file in results.get('files', []):
@@ -112,7 +105,7 @@ def keys(message):
              
               bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
        else:
-              send_me = bot.send_message(message.from_user.id,
+              bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
               #bot.register_next_step_handler(send_me, keys)
     
