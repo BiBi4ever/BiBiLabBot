@@ -8,7 +8,7 @@ import json
 from googleapiclient.http import MediaIoBaseDownload,MediaFileUpload
 from googleapiclient.discovery import build
 import io
-
+import gspread
 
 from dictionary_for_files import storageKey   #словарь 
 from Dicts import keyboard_for_buttons, keyboard_for_buttons1, keyboard_for_buttons2, keyboard_for_buttons3, callback_query_handler, callback_query_handler1, callback_query_handler2
