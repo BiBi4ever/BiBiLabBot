@@ -30,7 +30,7 @@ service = build('drive', 'v3', credentials=credentials)
 
 def download(message):
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
-         if results is TRUE:
+         if results:
               for file in results.get('files', []):
                      request = service.files().get_media(fileId=file.get('id'))
                      fh = io.FileIO(file.get('name'), 'wb')
