@@ -104,6 +104,9 @@ def keys(message):
                      request = service.files().get_media(fileId=file.get('id'))
                      fh = io.FileIO(filename, 'wb')
                      downloader = MediaIoBaseDownload(fh, request)
+                     done = False
+                     while done is False:
+                            status, done = downloader.next_chunk()
                      with open(filename, 'rb') as f:
                             bot.send_document(message.chat.id, f)
                             f.close()
