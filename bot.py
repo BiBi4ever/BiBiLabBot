@@ -89,6 +89,11 @@ def send_first_message(message):
  
 
 
+
+def send(message):
+       with open(message, 'rb') as f1:
+              bot.send_document(message.chat.id, f1)
+              f1.close()
        
          
 def keys(message):
@@ -99,9 +104,7 @@ def keys(message):
                      request = service.files().get_media(fileId=file.get('id'))
                      fh = io.FileIO(filename, 'wb')
                      downloader = MediaIoBaseDownload(fh, request)
-                     with open(filename, 'rb') as f1:
-                            bot.send_document(message.chat.id, f1)
-                            f1.close()
+                     send(filename)
                      
              
               bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
