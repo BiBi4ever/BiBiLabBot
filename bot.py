@@ -3,7 +3,7 @@ from PIL import Image
 from urllib.request import urlopen
 import os
 import ast
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2 import service_account
 import json
 from googleapiclient.http import MediaIoBaseDownload,MediaFileUpload
 from googleapiclient.discovery import build
@@ -21,7 +21,7 @@ url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/a
 #гугл диск
 SCOPES = ['https://www.googleapis.com/auth/drive']
 ID = os.environ.get('key')
-credentials = ServiceAccountCredentials.from_json_keyfile_dict(
+credentials = service_account.Credentials.from_service_account_file(
        ID, scopes=SCOPES)
 
 def download(message):
