@@ -94,10 +94,11 @@ def keys(message):
        results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
        if  results.get('files', []):
               for file in results.get('files', []):
+                     filename = file.get('name')
                      request = service.files().get_media(fileId=file.get('id'))
-                     fh = io.FileIO(file.get('name'), 'wb')
+                     fh = io.FileIO(filename, 'wb')
                      downloader = MediaIoBaseDownload(fh, request)
-                     with open(file.get('name'), 'rb') as f1:
+                     with open(filename, 'rb') as f1:
                             bot.send_document(message.chat.id, f1)
                             close(f1)
              
