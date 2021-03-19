@@ -20,7 +20,7 @@ callback_data_keyboard_PCR={'Обычная ПЦР':'https://s.tcdn.co/ec5/c1b/e
 
 keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(
             telebot.types.InlineKeyboardButton([key for key in callback_query_handler][0],callback_data=[values for values in callback_query_handler.values()][0]),
-            telebot.types.InlineKeyboardButton([key for key in callback_query_handler][1],callback_data=[values for values in callback_query_handler.values()]
+            telebot.types.InlineKeyboardButton([key for key in callback_query_handler][1],callback_data=[values for values in callback_query_handler.values()])
 
 keyboard_for_buttons1 = telebot.types.InlineKeyboardMarkup().add(
             telebot.types.InlineKeyboardButton([key for key in callback_query_handler1][0],callback_data=[values for values in callback_query_handler1.values()][0]),
