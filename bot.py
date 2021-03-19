@@ -91,7 +91,9 @@ def send_first_message(message):
 
          
 def keys(message):
+ 
        results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
+       bot.send_message(message.from_user.id, results)
        if results:
              # for file in results.get('files', []):
               #       request = service.files().get_media(fileId=file.get('id'))
