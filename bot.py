@@ -89,8 +89,7 @@ def keys(message):
                   bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n Чтобы начать новый поиск, нажмите /protocols')
         
     if message == '/protocols':  
-                  link = bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
-                  bot.register_next_step_handler(link, callback_handler)
+                  bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
     else:
          message (found_links)
         
