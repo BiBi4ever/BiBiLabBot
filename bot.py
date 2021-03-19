@@ -8,7 +8,6 @@ import json
 from googleapiclient.http import MediaIoBaseDownload,MediaFileUpload
 from googleapiclient.discovery import build
 import io
-import gspread
 
 from dictionary_for_files import storageKey   #словарь 
 from Dicts import keyboard_for_buttons, keyboard_for_buttons1, keyboard_for_buttons2, keyboard_for_buttons3, callback_query_handler, callback_query_handler1, callback_query_handler2
@@ -24,17 +23,9 @@ ID = json.loads(os.environ.get('key'))
 credentials = ServiceAccountCredentials.from_json_keyfile_dict(
        ID, scopes=SCOPES)
 service = build('drive', 'v3', credentials=credentials)
-#client = gspread.authorize(credentials)
 
 
 
-def download(message):
-         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
-         if results:
-              for file in results.get('files', []):
-                     request = service.files().get_media(fileId=file.get('id'))
-                     fh = io.FileIO(file.get('name'), 'wb')
-                     downloader = MediaIoBaseDownload(fh, request)
 
 bot = telebot.TeleBot(token)
 
@@ -58,7 +49,7 @@ def callback_handler(message):
     def query_handler(call1):
         if call1.data == 'key':
             send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи слово')
-            bot.register_next_step_handler(send,download)
+            bot.register_next_step_handler(send, keys)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
         elif call1.data == 'button':
             bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
@@ -98,18 +89,15 @@ def send_first_message(message):
          
          
 def keys(message):
-    dickt = storageKey 
-    found_links=[]
-    for i in dickt:
-            if message.text.lower() in i:
-                found_links.append(storageKey[i])
-         
-    if len(found_links) <= 0:
-         send_me = bot.send_message(message.from_user.id,
+       results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
+         if results:
+              for file in results.get('files', []):
+                     bot.send_document(service.files().get_media(fileId=file.get('id')))
+              bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n Чтобы начать новый поиск, нажмите /protocols')
+         else:
+              send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
          bot.register_next_step_handler(send_me, keys)
     
-    elif len(found_links) > 0:
-         bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n Чтобы начать новый поиск, нажмите /protocols')
     
 bot.polling(True)
