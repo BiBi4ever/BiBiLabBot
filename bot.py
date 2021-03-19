@@ -104,7 +104,9 @@ def keys(message):
                      request = service.files().get_media(fileId=file.get('id'))
                      fh = io.FileIO(filename, 'wb')
                      downloader = MediaIoBaseDownload(fh, request)
-                     bot.send_document(message.chat.id, filename)
+                     with open(filename, 'rb') as f:
+                            bot.send_document(message.chat.id, f)
+                            f.close()
                      
              
               bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
