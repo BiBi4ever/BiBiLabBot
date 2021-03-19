@@ -18,16 +18,9 @@ callback_data_keyboard_PCR={'Обычная ПЦР':'https://s.tcdn.co/ec5/c1b/e
                         'Реал тайм ПЦР с зондами': 'https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png',
                         'Реал тайм ПЦР на sybr green':'https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'}
 
-keyboard_list_of_buttons = []
-buttons = []
-keyboard_list_of_bottons1 = []
-keyboard_list_of_bottons2 = []
-keyboard_list_of_bottons3 = []
-
-for i in callback_query_handler:
-    buttons.append(telebot.types.InlineKeyboardButton(i,callback_data=callback_query_handler[i]))
-keyboard_list_of_buttons.append(buttons)
-keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(keyboard_list_of_buttons)
+keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(
+        telebot.types.InlineKeyboardButton([key for key in callback_query_handler][0],callback_data=[values for values in callback_query_handler.values()][0]),
+        telebot.types.InlineKeyboardButton([key for key in callback_query_handler][1],callback_data=[values for values in callback_query_handler.values()][1]))
 
 keyboard_for_buttons1 = telebot.types.InlineKeyboardMarkup().add(
             telebot.types.InlineKeyboardButton([key for key in callback_query_handler1][0],callback_data=[values for values in callback_query_handler1.values()][0]),
@@ -45,5 +38,5 @@ keyboard_for_buttons3 = telebot.types.InlineKeyboardMarkup().add(
             telebot.types.InlineKeyboardButton([key for key in callback_data_keyboard_PCR][0],callback_data=[values for values in callback_data_keyboard_PCR.values()][0]),
             telebot.types.InlineKeyboardButton([key for key in callback_data_keyboard_PCR][1],callback_data=[values for values in callback_data_keyboard_PCR.values()][1]),
             telebot.types.InlineKeyboardButton([key for key in callback_data_keyboard_PCR][2],callback_data=[values for values in callback_data_keyboard_PCR.values()][2]),
-            telebot.types.InlineKeyboardButton([key for key in callback_query_handler2][0],callback_data=[values for values in callback_query_handler2.values()][0]))
+            telebot.types.InlineKeyboardButton([key for key in callback_query_handler2][1],callback_data=[values for values in callback_query_handler2.values()][1]))
 
