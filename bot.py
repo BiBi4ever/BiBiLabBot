@@ -26,10 +26,11 @@ credentials = ServiceAccountCredentials.from_json_keyfile_dict(
 
 def download(message):
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
-for file in results.get('files', []):
-        request = service.files().get_media(fileId=file.get('id'))
-        fh = io.FileIO(file.get('name'), 'wb')
-        downloader = MediaIoBaseDownload(fh, request)
+         if results is TRUE:
+              for file in results.get('files', []):
+                     request = service.files().get_media(fileId=file.get('id'))
+                     fh = io.FileIO(file.get('name'), 'wb')
+                     downloader = MediaIoBaseDownload(fh, request)
 
 bot = telebot.TeleBot(token)
 
