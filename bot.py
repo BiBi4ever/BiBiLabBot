@@ -96,10 +96,10 @@ def keys(message):
                      fh = io.FileIO(file.get('name'), 'wb')
                      bot.send_document(message.chat.id, fh)
                      bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
-         else:
+       else:
               send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
-         bot.register_next_step_handler(send_me, keys)
+              bot.register_next_step_handler(send_me, keys)
     
     
 bot.polling(True)
