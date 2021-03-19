@@ -91,7 +91,7 @@ def send_first_message(message):
 
          
 def keys(message):
- 
+       results = 0
        results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
        if results:
              # for file in results.get('files', []):
