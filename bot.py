@@ -95,7 +95,7 @@ def keys(message):
        if  results.get('files', []):
               for file in results.get('files', []):
                      request = service.files().get_media(fileId=file.get('id'))
-                     file_info = io.FileIO(file.get('name'), 'wb')
+                     fh = io.FileIO(file.get('name'), 'wb')
                      downloader = MediaIoBaseDownload(fh, request)
                      with open(downloader, 'rb') as f1:
                             bot.send_document(message.chat.id, f1)
