@@ -22,7 +22,7 @@ url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/a
 SCOPES = ['https://www.googleapis.com/auth/drive']
 ID = os.environ.get('key')
 credentials = service_account.Credentials.from_service_account_file(
-       json.loads(ID), scopes=SCOPES)
+       ID, scopes=SCOPES)
 
 def download(message):
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
