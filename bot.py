@@ -2,6 +2,11 @@ import telebot
 from PIL import Image
 from urllib.request import urlopen
 import os
+import ast
+from google.oauth2 import service_account
+from googleapiclient.http import MediaIoBaseDownload,MediaFileUpload
+from googleapiclient.discovery import build
+import io
 
 from dictionary_for_files import storageKey   #словарь 
 from Dicts import keyboard_for_buttons, keyboard_for_buttons1, keyboard_for_buttons2, keyboard_for_buttons3, callback_query_handler, callback_query_handler1, callback_query_handler2
@@ -10,6 +15,19 @@ token = os.environ.get('token')
 
 #картинка
 url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/arHUSXBmA5Y.jpg?size=527x505&quality=96&proxy=1&sign=3103cde7044a879a6d8e76a5b8ab2d62&type=album"
+
+#гугл диск
+SCOPES = ['https://www.googleapis.com/auth/drive']
+ID = json.loads(os.environ.get('key'))
+credentials = service_account.Credentials.from_json_keyfile_dict(
+       ID, scopes=SCOPES)
+
+def download(message):
+         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
+for file in results.get('files', []):
+        request = service.files().get_media(fileId=file.get('id'))
+        fh = io.FileIO(file.get('name'), 'wb')
+        downloader = MediaIoBaseDownload(fh, request)
 
 bot = telebot.TeleBot(token)
 
@@ -33,7 +51,7 @@ def callback_handler(message):
     def query_handler(call1):
         if call1.data == 'key':
             send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи слово')
-            bot.register_next_step_handler(send,keys)
+            bot.register_next_step_handler(send,download)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
         elif call1.data == 'button':
             bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
