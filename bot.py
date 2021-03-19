@@ -3,10 +3,8 @@ from PIL import Image
 from urllib.request import urlopen
 import os
 import ast
-from oauth2client.service_account import ServiceAccountCredentials
 import json
 from googleapiclient.http import MediaIoBaseDownload,MediaFileUpload
-from googleapiclient.discovery import build
 import io
 from google_drive import authorization
 from dictionary_for_files import storageKey   #словарь 
