@@ -13,7 +13,7 @@ import io
 from dictionary_for_files import storageKey   #словарь 
 from Dicts import keyboard_for_buttons, keyboard_for_buttons1, keyboard_for_buttons2, keyboard_for_buttons3, callback_query_handler, callback_query_handler1, callback_query_handler2
 
-token = json.loads(os.environ.get('token'))
+token = os.environ.get('token')
 
 #картинка
 url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/arHUSXBmA5Y.jpg?size=527x505&quality=96&proxy=1&sign=3103cde7044a879a6d8e76a5b8ab2d62&type=album"
@@ -22,7 +22,7 @@ url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/a
 SCOPES = ['https://www.googleapis.com/auth/drive']
 ID = os.environ.get('key')
 credentials = service_account.Credentials.from_service_account_file(
-       ID, scopes=SCOPES)
+       json.loads(ID), scopes=SCOPES)
 
 def download(message):
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
