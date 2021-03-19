@@ -89,13 +89,13 @@ def send_first_message(message):
  
 
 
-
-#def send(message, filename):
- #      with open(filename, 'rb') as f1:
-  #            bot.send_document(message.chat.id, f1)
-   #           f1.close()
+def send(message, filename):
+       with open(filename, 'rb') as f:
+              bot.send_document(message.chat.id, f)
+              f1.close()
        
-         
+ 
+
 def keys(message):
        results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
        if  results.get('files', []):
@@ -107,9 +107,7 @@ def keys(message):
                      done = False
                      while done is False:
                             status, done = downloader.next_chunk()
-                     with open(filename, 'rb') as f:
-                            bot.send_document(message.chat.id, f)
-                            f.close()
+                     send()
                      
              
               bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
