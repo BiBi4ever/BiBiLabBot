@@ -18,14 +18,17 @@ callback_data_keyboard_PCR={'Обычная ПЦР':'https://s.tcdn.co/ec5/c1b/e
                         'Реал тайм ПЦР с зондами': 'https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png',
                         'Реал тайм ПЦР на sybr green':'https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'}
 
-Key = []
+keyboard_list_of_buttons = []
+buttons = []
 keyboard_list_of_bottons1 = []
 keyboard_list_of_bottons2 = []
 keyboard_list_of_bottons3 = []
 
 for i in callback_query_handler:
-    keyboard_list_of_bottons = telebot.types.InlineKeyboardButton(i,callback_data=callback_query_handler[i])
-    Key.append(keyboard_list_of_bottons)
+    buttons.append(telebot.types.InlineKeyboardButton(i,callback_data=callback_query_handler[i]))
+keyboard_list_of_bottons.append(buttons)
+keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(keyboard_list_of_bottons)
+
 keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(Key)
 
 keyboard_for_buttons1 = telebot.types.InlineKeyboardMarkup().add(
