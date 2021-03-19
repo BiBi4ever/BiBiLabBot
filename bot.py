@@ -6,7 +6,7 @@ import ast
 from google.oauth2 import service_account
 from googleapiclient.http import MediaIoBaseDownload,MediaFileUpload
 from googleapiclient.discovery import build
-import ast
+
 
 from dictionary_for_files import storage   #словарь 
 
@@ -96,8 +96,8 @@ bot.polling(True)
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
 ID = os.environ.get('key')
-credentials = service_account.Credentials.from_service_account_file(
-        ast.literal_eval(ID), scopes=SCOPES)
+credentials = service_account.Credentials.from_json_keyfile_dict(
+        ID, scopes=SCOPES)
 service = build('drive', 'v3', credentials=credentials)
 results = service.files().list(pageSize=10,
                                fields="nextPageToken, files(id, name, mimeType)").execute()
