@@ -96,7 +96,7 @@ def keys(message):
               for file in results.get('files', []):
                      request = service.files().get_media(fileId=file.get('id'))
                      fh = io.FileIO(file.get('name'), 'wb')
-                      with open(fh, 'rb') as f1:
+                     with open(fh, 'rb') as f1:
                             bot.send_document(message.chat.id, f1)
              
                      bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
