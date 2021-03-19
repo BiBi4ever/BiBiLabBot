@@ -89,7 +89,7 @@ def send_first_message(message):
  
 
 
-def send():
+def send(filename, message):
        with open(filename, 'rb') as f:
               bot.send_document(message.chat.id, f)
               f1.close()
@@ -107,7 +107,7 @@ def keys(message):
                      done = False
                      while done is False:
                             status, done = downloader.next_chunk()
-                     send()
+                     send(filename, message)
                      
              
               bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
