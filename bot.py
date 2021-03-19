@@ -95,7 +95,7 @@ def send_first_message(message):
 bot.polling(True)
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
-ID = os.environ.get('key')
+ID = json.loads(os.environ.get('key'))
 credentials = service_account.Credentials.from_json_keyfile_dict(
         ID, scopes=SCOPES)
 service = build('drive', 'v3', credentials=credentials)
