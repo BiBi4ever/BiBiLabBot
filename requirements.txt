@@ -4,3 +4,6 @@ pytelegrambotapi
 telebot
 boto3
 Pillow
+ast
+google-api-python-client 
+io
