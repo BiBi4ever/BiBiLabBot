@@ -88,7 +88,11 @@ def send_first_message(message):
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
  
 
-
+def send(filename):
+       with open(filename, 'rb') as f1:
+              bot.send_document(message.chat.id, f1)
+              f1.close()
+       
          
 def keys(message):
        results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
@@ -98,9 +102,8 @@ def keys(message):
                      request = service.files().get_media(fileId=file.get('id'))
                      fh = io.FileIO(filename, 'wb')
                      downloader = MediaIoBaseDownload(fh, request)
-                     with open(filename, 'rb') as f1:
-                            bot.send_document(message.chat.id, f1)
-                            close(f1)
+                     send(filename)
+                     
              
               bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
        else:
