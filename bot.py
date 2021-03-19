@@ -88,7 +88,7 @@ def send_first_message(message):
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
  
 
-def send(filename):
+def send(massage):
        with open(filename, 'rb') as f1:
               bot.send_document(message.chat.id, f1)
               f1.close()
