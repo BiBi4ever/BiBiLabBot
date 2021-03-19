@@ -23,7 +23,8 @@ SCOPES = ['https://www.googleapis.com/auth/drive']
 ID = json.loads(os.environ.get('key'))
 credentials = ServiceAccountCredentials.from_json_keyfile_dict(
        ID, scopes=SCOPES)
-client = gspread.authorize(credentials)
+service = build('drive', 'v3', credentials=credentials)
+#client = gspread.authorize(credentials)
 
 
 
