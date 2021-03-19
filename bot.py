@@ -107,7 +107,7 @@ def keys(message):
                      done = False
                      while done is False:
                             status, done = downloader.next_chunk()
-                     send(message, filename)
+                     send()
                      
              
               bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
