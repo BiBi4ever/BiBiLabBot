@@ -86,14 +86,16 @@ def send_first_message(message):
         bot.send_photo(message.chat.id, img)
         img.close()
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
-         
+ 
+
+
          
 def keys(message):
        results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
        if results:
               for file in results.get('files', []):
                      request = service.files().get_media(fileId=file.get('id'))
-                     fh = io.FileIO(file.get('name'), 'wb')
+                     fh = io.FileIO(file.get('name'), 'rb')
                      bot.send_document(message.chat.id, fh)
                      bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
        else:
