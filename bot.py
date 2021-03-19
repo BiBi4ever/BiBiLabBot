@@ -79,17 +79,20 @@ def keys(message):
             if message.text.lower() in i:
                 found_links.append(storageKey[i])
          
-    if message != '/protocols':          
+    def message (found_links):
          if len(found_links) <= 0:
                   send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
-                  bot.register_next_step_handler(send_me, keys )
+                  bot.register_next_step_handler(send_me, message)
     
          elif len(found_links) > 0:
                   bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n Чтобы начать новый поиск, нажмите /protocols')
         
-        
-        
+    if message == '/protocols':  
+                  link = bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
+                  bot.register_next_step_handler(link, callback_handler)
+    else:
+         message (found_links)
         
     
 bot.polling(True)
