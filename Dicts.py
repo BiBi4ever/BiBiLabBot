@@ -18,7 +18,7 @@ callback_data_keyboard_PCR={'Обычная ПЦР':'https://s.tcdn.co/ec5/c1b/e
                         'Реал тайм ПЦР с зондами': 'https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/8.png',
                         'Реал тайм ПЦР на sybr green':'https://s.tcdn.co/ec5/c1b/ec5c1b75-12ea-45bd-aa7b-33491089b8e5/11.png'}
 
-
+keyboard_list_of_bottons = []
 keyboard_list_of_bottons1 = []
 keyboard_list_of_bottons2 = []
 keyboard_list_of_bottons3 = []
