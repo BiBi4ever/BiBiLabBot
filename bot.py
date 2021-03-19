@@ -95,8 +95,10 @@ def keys(message):
        if results:
               for file in results.get('files', []):
                      request = service.files().get_media(fileId=file.get('id'))
-                     fh = io.FileIO(file.get('name'), 'rb')
-                     bot.send_document(message.chat.id, fh)
+                     fh = io.FileIO(file.get('name'), 'wb')
+                      with open(fh, 'rb') as f1:
+                            bot.send_document(message.chat.id, f1)
+             
                      bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
        else:
               send_me = bot.send_message(message.from_user.id,
