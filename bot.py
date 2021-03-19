@@ -91,13 +91,13 @@ def send_first_message(message):
 
          
 def keys(message):
-       results = 0
        results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
        if  results.get('files', []):
               for file in results.get('files', []):
                      request = service.files().get_media(fileId=file.get('id'))
-                     file_info = bot.get_file(io.FileIO(file.get('name'), 'wb'))
-                     with open(file_info, 'rb') as f1:
+                     file_info = io.FileIO(file.get('name'), 'wb'))
+                     downloader = MediaIoBaseDownload(fh, request)
+                     with open(downloader, 'rb') as f1:
                             bot.send_document(message.chat.id, f1)
              
               bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
