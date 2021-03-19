@@ -90,8 +90,8 @@ def send_first_message(message):
 
 
 
-def send(message):
-       with open(message, 'rb') as f1:
+def send(filename, message):
+       with open(filename, 'rb') as f1:
               bot.send_document(message.chat.id, f1)
               f1.close()
        
