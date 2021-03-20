@@ -102,11 +102,12 @@ def keys(message):
                            while done is False:
                                     status, done = downloader.next_chunk()
                            send(filename, message)
-         bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
+                  bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
          else:
                   send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
                   bot.register_next_step_handler(send_me, keys)
+    
     
     
 bot.polling(True)
