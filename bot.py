@@ -25,14 +25,14 @@ def help_message(message):
 )
 # Команда для работы с протоколами, если пользователь выбирает поиск по ключу (вызов key), он вводит слова для протокола сам, если выбирает кнопку (вызов button) - тыкает на варианты
 @bot.message_handler(commands=['protocols'])
-def exchange_command(message):
+def protocol_command(message):
     keyboard = telebot.types.InlineKeyboardMarkup()
     keyboard.row(
         telebot.types.InlineKeyboardButton('Поиск по ключу', callback_data='key'),
         telebot.types.InlineKeyboardButton('Поиск с кнопками',callback_data='button'))
     bot.send_message(message.chat.id, 'Выберите нужный вариант:', reply_markup=keyboard)
 
-    @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'] )
+    @bot.callback_query_handler(func=lambda call1: call1.data in ['key', 'button'])
     def query_handler(call1):
         if call1.data == 'key':
             # поиск по ключу, см. функцию ниже:
@@ -68,13 +68,13 @@ def exchange_command(message):
 def send_first_message(message):
     greet = ['hello','hi','привет', 'здравствуй']
     if any(greetings in message.text.lower() for greetings in greet):
-        bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал')
+        bot.send_message(message.chat.id, 'Рад тебя видеть! Я скучал')
 #бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
     else:
         img = Image.open(urlopen(url))
         bot.send_photo(message.chat.id, img)
         img.close()
-        bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
+        bot.send_message(message.chat.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
 
 # функция поиска по ключу
 def keys(message):
@@ -84,9 +84,9 @@ def keys(message):
         if message.text.lower() in i:
             found_links.append(storageKey[i])
     if len(found_links) > 0:
-        bot.send_message(message.from_user.id, "\n\n".join(found_links) + '\n\n\U0001F50E Чтобы начать новый поиск, нажми /protocols')
+        bot.send_message(message.chat.id, "\n\n".join(found_links) + '\n\n\U0001F50E Чтобы начать новый поиск, нажми /protocols')
     else:
-        bot.send_message(message.from_user.id,
+        bot.send_message(message.chat.id,
                                  'Совпадений не найдено. Попробуй ввести другое слово, например: ДНК.\nНажми /protocols, чтобы начать поиск')        
          
 bot.polling(True)
