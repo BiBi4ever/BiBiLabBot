@@ -91,9 +91,6 @@ def send(filename, message):
  
 
 def keys(message):
-       if message == '/protocols':
-         bot.send_message(message.chat.id, 'Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons)
-       else:
          service = authorization(ID)
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
          if  results.get('files', []):
@@ -101,7 +98,7 @@ def keys(message):
                            filename = file.get('name')
                            request = service.files().get_media(fileId=file.get('id'))
                            fh = io.FileIO(filename, 'wb')
-                           downloader = MediaIoBaseDownload(fh, request)
+                  downloader = MediaIoBaseDownload(fh, request)
                            done = False
                            while done is False:
                                     status, done = downloader.next_chunk()
@@ -109,7 +106,7 @@ def keys(message):
                   bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
          else:
                   send_me = bot.send_message(message.from_user.id,
-                                 'Совпадений не найдено. Попробуйте ввести другое слово, например: ДНК \n Или нажмите /protocols, чтобы начать поиск')
+                                 'Совпадений не найдено. Нажмите поиск по ключу и попробуйте ввести другое слово')
                   bot.register_next_step_handler(send_me, query_handler)
     
     
