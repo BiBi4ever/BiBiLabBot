@@ -107,7 +107,7 @@ def keys(message):
          else:
                   send_me = bot.send_message(message.from_user.id,
                                  'Совпадений не найдено. Нажмите поиск по ключу и попробуйте ввести другое слово')
-                  bot.register_next_step_handler(send_me, query_handler)
+                  bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons)
     
     
     
