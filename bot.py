@@ -105,9 +105,7 @@ def keys(message):
                   send(filename, message)
                   bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
          else:
-                  send_me = bot.send_message(message.from_user.id,
-                                 'Совпадений не найдено. Нажмите поиск по ключу и попробуйте ввести другое слово')
-                  bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons)
+                  bot.send_message(message.from_user.id,'Совпадений не найдено. Нажмите поиск по ключу и попробуйте ввести другое слово', reply_markup=keyboard_for_buttons)
     
     
     
