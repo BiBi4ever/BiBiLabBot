@@ -7,7 +7,6 @@ import json
 from googleapiclient.http import MediaIoBaseDownload,MediaFileUpload
 import io
 from google_drive import authorization
-from dictionary_for_files import storageKey   #словарь 
 from Dicts import keyboard_for_buttons, keyboard_for_buttons1, keyboard_for_buttons2, keyboard_for_buttons3, callback_query_handler, callback_query_handler1, callback_query_handler2
 
 
@@ -43,30 +42,30 @@ def callback_handler(message):
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
         elif call1.data == 'button':
             bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
-            bot.answer_callback_query(query.id)
+            bot.answer_callback_query(call1.id)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
             
     @bot.callback_query_handler(func=lambda call2: call2.data in [value for value in callback_query_handler1.values()])
     def query_handler1(call2):
         if call2.data == 'acid':
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons2)
-            bot.answer_callback_query(query.id)
+            bot.answer_callback_query(call2.id)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
                   
         elif call2.data == 'PCR':
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons3) 
-            bot.answer_callback_query(query.id)
+            bot.answer_callback_query(call2.id)
             #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам 
     
         elif call2.data == 'back':
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons)
-            bot.answer_callback_query(query.id)
+            bot.answer_callback_query(call2.id)
         
     @bot.callback_query_handler(func=lambda call3: call3.data in [value for value in callback_query_handler2.values()] )
     def query_handler2(call3):
         if call3.data == 'back1':
             bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
-            bot.answer_callback_query(query.id)
+            bot.answer_callback_query(call3.id)
 
 #Ответ на приветствие
 @bot.message_handler(content_types=['text'])
