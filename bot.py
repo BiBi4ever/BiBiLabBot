@@ -99,10 +99,10 @@ def keys(message):
                            request = service.files().get_media(fileId=file.get('id'))
                            fh = io.FileIO(filename, 'wb')
                   downloader = MediaIoBaseDownload(fh, request)
-                           done = False
-                           while done is False:
-                                    status, done = downloader.next_chunk()
-                           send(filename, message)
+                  done = False
+                  while done is False:
+                           status, done = downloader.next_chunk()
+                  send(filename, message)
                   bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
          else:
                   send_me = bot.send_message(message.from_user.id,
