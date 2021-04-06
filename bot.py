@@ -95,7 +95,7 @@ def keys(message):
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
          if  results.get('files', []):
                   for file in results.get('files', []):
-                           filename = file.get(name)
+                           filename = file.get(message.text.lower())
                            request = service.files().get_media(fileId=file.get('id'))
                            fh = io.FileIO(filename, 'wb')
                   downloader = MediaIoBaseDownload(fh, request)
