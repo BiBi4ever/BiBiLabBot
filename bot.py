@@ -96,15 +96,17 @@ def keys(message):
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
          
          if  results.get('files'):
-                  for file in results.get('files'):
-                           filename = file.get('name')
-                           request = service.files().get_media(fileId=file.get('id'))
-                           fh = io.FileIO(filename, 'wb')
-                  downloader = MediaIoBaseDownload(fh, request)
-                  done = False
-                  while done is False:
-                           status, done = downloader.next_chunk()
-                  send(filename, message)
+                  while len(files) >= 0:
+                           for file in results.get('files'):
+                                    filename = file.get('name')
+                                    request = service.files().get_media(fileId=file.get('id'))
+                                    fh = io.FileIO(filename, 'wb')
+                           downloader = MediaIoBaseDownload(fh, request)
+                           done = False
+                           while done is False:
+                                    status, done = downloader.next_chunk()
+                           send(filename, message)
+                           len(files) - 1
                   bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
          else:
                   bot.send_message(message.from_user.id,'Совпадений не найдено. Нажмите поиск по ключу и попробуйте ввести другое слово', reply_markup=keyboard_for_buttons)
