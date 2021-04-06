@@ -105,7 +105,7 @@ def keys(message):
                            while done is False:
                                     status, done = downloader.next_chunk()
                            send(filename, message)
-                  bot.send_message(message.from_user.id, results)
+                  bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
          else:
                   bot.send_message(message.from_user.id,'Совпадений не найдено. Нажмите поиск по ключу и попробуйте ввести другое слово', reply_markup=keyboard_for_buttons)
     
