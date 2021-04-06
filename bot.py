@@ -24,7 +24,7 @@ def send_welcome(message):
                                
 @bot.message_handler(commands=['help'])
 def help_message(message):
-    bot.send_message(message.chat.id, ' С моей помощью ты можешь увидеть протоколы для '
+    bot.send_message(message.chat.id, type(message.text.lower()), ' С моей помощью ты можешь увидеть протоколы для '
                                       'работы с нуклеиновыми кислотами, обратной транскрипции и '
                                       'ПЦР.\n\n' 
                      'Чтобы найти нужный протокол, нажми /protocols. Выбирай поиск с кнопками или воспользуйся поиском по ключу и введи ключевое слово.')
@@ -92,12 +92,12 @@ def send(filename, message):
 
 def keys(message):
          service = authorization(ID)
-         print(type(message.text.lower()))
+
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
          
          if  results.get('files', []):
                   for file in results.get('files', []):
-                           filename = file.get(str(message.text.lower()))
+                           filename = file.get('name')
                            request = service.files().get_media(fileId=file.get('id'))
                            fh = io.FileIO(filename, 'wb')
                   downloader = MediaIoBaseDownload(fh, request)
