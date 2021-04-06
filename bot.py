@@ -95,8 +95,7 @@ def keys(message):
 
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
          
-          if  results.get(['files']):
-                  while len(['files']) >= 0:
+          if  results.get('files'):
                            for file in results.get('files'):
                                     filename = file.get('name')
                                     request = service.files().get_media(fileId=file.get('id'))
@@ -106,8 +105,7 @@ def keys(message):
                            while done is False:
                                     status, done = downloader.next_chunk()
                            send(filename, message)
-                           len(['files']) - 1
-                  bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
+                  bot.send_message(message.from_user.id, results)
          else:
                   bot.send_message(message.from_user.id,'Совпадений не найдено. Нажмите поиск по ключу и попробуйте ввести другое слово', reply_markup=keyboard_for_buttons)
     
