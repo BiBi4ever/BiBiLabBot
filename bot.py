@@ -24,7 +24,7 @@ def send_welcome(message):
                                
 @bot.message_handler(commands=['help'])
 def help_message(message):
-    bot.send_message(message.chat.id, type(message.text.lower()), ' С моей помощью ты можешь увидеть протоколы для '
+    bot.send_message(message.chat.id, ' С моей помощью ты можешь увидеть протоколы для '
                                       'работы с нуклеиновыми кислотами, обратной транскрипции и '
                                       'ПЦР.\n\n' 
                      'Чтобы найти нужный протокол, нажми /protocols. Выбирай поиск с кнопками или воспользуйся поиском по ключу и введи ключевое слово.')
