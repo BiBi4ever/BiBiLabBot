@@ -15,7 +15,7 @@ callback_data_keyboard_Acid={'Выделение ДНК по Хомчински'
                         'Обратная транскрипция':'REVERSE_TRANSCRIPTION'}
 
 callback_data_keyboard_PCR={'Обычная ПЦР':'PCR_REARE',
-                        'Real time ПЦР зонд': 'PCR_WITH_ZOND',
+                        'Real time ПЦР c зондами': 'PCR_WITH_ZOND',
                         'Real time ПЦР sybr':'PCR_SYBRE'}
 
 keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(
