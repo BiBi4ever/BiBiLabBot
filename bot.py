@@ -33,7 +33,7 @@ def help_message(message):
 @bot.message_handler(commands=['protocols'])
 def callback_handler(message):    
     bot.send_message(message.chat.id, 'Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons)
-    bot.answer_callback_query(callback_query_id=chat.id, cache_time = 60)
+    bot.answer_callback_query(callback_query_id=message.chat.id, cache_time = 60)
     
     @bot.callback_query_handler(func=lambda call1: call1.data in [value for value in callback_query_handler.values()])
     def query_handler(call1):
