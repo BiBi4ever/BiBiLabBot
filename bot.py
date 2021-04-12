@@ -39,7 +39,7 @@ def callback_handler(message):
         if call1.data == 'key':
             send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи слово')
             bot.register_next_step_handler(send, keys)
-            bot.answer_callback_query(call1.id, cache.time = 60)
+            bot.answer_callback_query(callback_query_id=call1.id, cache.time = 60)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
         elif call1.data == 'button':
             bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
