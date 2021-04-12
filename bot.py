@@ -33,13 +33,13 @@ def help_message(message):
 @bot.message_handler(commands=['protocols'])
 def callback_handler(message):    
     bot.send_message(message.chat.id, 'Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons)
+    bot.answer_callback_query(callback_query_id=call1.id, cache_time = 60)
     
     @bot.callback_query_handler(func=lambda call1: call1.data in [value for value in callback_query_handler.values()])
     def query_handler(call1):
         if call1.data == 'key':
             send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи слово')
             bot.register_next_step_handler(send, keys)
-            bot.answer_callback_query(callback_query_id=call1.id, cache_time = 60)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
         elif call1.data == 'button':
             bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
