@@ -77,7 +77,7 @@ def callback_handler(message):
                   
 
 #Функция чат, выдет нужный протокол к кнопке
-def chat (filena, message):
+def chat (filena):
          service = authorization(ID)
 
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filena.lower()) ).execute()
