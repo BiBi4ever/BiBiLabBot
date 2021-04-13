@@ -87,6 +87,7 @@ def chat (filena, message_id):
                   request = service.files().get_media(fileId=file.get('id'))
                   fh = io.FileIO(filename, 'wb')
                   downloader = MediaIoBaseDownload(fh, request)
+                  done = False
                   with open(filename, 'rb') as f:
                            bot.send_document(message_id,f)
                            f.close()
