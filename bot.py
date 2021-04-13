@@ -49,28 +49,32 @@ def callback_handler(message):
         if call2.data == 'acid':
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons2)
             bot.answer_callback_query(call2.id)
-            #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам
                   
         elif call2.data == 'PCR':
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons3) 
             bot.answer_callback_query(call2.id)
-            #Переписывает предыдущее сообщение и добавляет новую клавиатуру для выбора дальше по кнопкам 
     
         elif call2.data == 'back':
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons)
             bot.answer_callback_query(call2.id)
-        
+                  
     @bot.callback_query_handler(func=lambda call3: call3.data in [value for value in callback_query_handler2.values()] )
     def query_handler2(call3):
         if call3.data == 'back1':
             bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
             bot.answer_callback_query(call3.id)
-    
+         
+    #Ниже идет обработка клавиш и выдачу контретного протокола через функцию чат
     @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
     def query_handler2(call4):
             send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
             bot.register_next_step_handler(send1,chat(filename=call4.data, message=send1))
-            
+         
+    @bot.callback_query_handler(func=lambda call5: call5.data in [value for value in callback_data_keyboard_PCR.values()] )
+    def query_handler2(call5):
+            send2 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
+            bot.register_next_step_handler(send1,chat(filename=call4.data, message=send2))
+                  
 #Ответ на приветствие
 @bot.message_handler(content_types=['text'])
 def send_first_message(message):
@@ -85,7 +89,7 @@ def send_first_message(message):
         img.close()
         bot.send_message(message.chat.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
 
-
+#Функция чат, выдет нужный протокол к кнопке
 def chat (filename, message):
          service = authorization(ID)
 
@@ -126,9 +130,9 @@ def keys(message):
                            while done is False:
                                     status, done = downloader.next_chunk()
                            send(filename, message)
-                  bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
+                  bot.send_message(message.from_user.id, '\n\n Если хочешь начать новый поиск, нажми /protocols')
          else:
-                  bot.send_message(message.from_user.id,'Совпадений не найдено. Нажмите поиск по ключу и попробуйте ввести другое слово', reply_markup=keyboard_for_buttons)
+                  bot.send_message(message.from_user.id,'Совпадений не найдено. Нажми поиск по ключу и попробуй ввести другое слово', reply_markup=keyboard_for_buttons)
     
     
     
