@@ -133,4 +133,4 @@ def keys(message):
     
     
     
-bot.ifinity_polling(True)
+bot.polling(True)
