@@ -90,7 +90,7 @@ def send_first_message(message):
 def chat (filename, message):
          service = authorization(ID)
 
-         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filename.text.lower()) ).execute()
+         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filename.lower()) ).execute()
          
          if  results.get('files'):
                   for file in results.get('files'):
