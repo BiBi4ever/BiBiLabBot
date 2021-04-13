@@ -37,7 +37,7 @@ def callback_handler(message):
     def query_handler(call1):
         if call1.data == 'key':
             send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Не вводи /protocols, /help или /start. Я не смогу обработать эти запросы, пока идет поиск по ключу. \n\nВведи слово:')
-            bot.register_next_step_handler(send, keys(filena = message.text.lower()))
+            bot.register_next_step_handler(send, keys)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
         elif call1.data == 'button':
             bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
@@ -102,11 +102,11 @@ def Send(filename, message):
        
  
 
-def keys(filena, message):
+def keys(message):
          
          service = authorization(ID) 
 
-         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filena) ).execute()
+         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
          
          if  results.get('files'):
                   for file in results.get('files'):
