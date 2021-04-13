@@ -30,7 +30,7 @@ def send_first_message(message):
     if any(greetings in message.text.lower() for greetings in greet):
         bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал!')
         bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAECEn5gUpnvRKf1xOwyiAABx3Z1rhdguVcAAgUAA8A2TxP5al-agmtNdR4E")
-    elif massage.text.lower()=='/protocols':
+    elif message.text.lower()=='/protocols':
          bot.register_next_step_handler(callback_handler)
 #бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
     else:
