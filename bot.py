@@ -96,13 +96,13 @@ def chat (filename, message):
                   while done is False:
                            status, done = downloader.next_chunk()
                   send(filename, message)
-         bot.send_message(chat_id=message.chat.id, text='\n\n Чтобы начать новый поиск, нажмите /protocols')
          
 
 #отправка файла в чатик
 def send(filename, message):
        with open(filename, 'rb') as f:
               bot.send_document(message.chat.id, f)
+              bot.send_message(chat_id=message.chat.id, text='\n\n Чтобы начать новый поиск, нажмите /protocols')
               f.close()
        
  
