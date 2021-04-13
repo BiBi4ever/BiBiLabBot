@@ -102,11 +102,11 @@ def send(filename, message):
        
  
 
-def keys(message):
+def keys(filena, message):
          
          service = authorization(ID) 
-         
-         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
+         filena = message.text.lower()
+         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filena) ).execute()
          
          if  results.get('files'):
                   for file in results.get('files'):
