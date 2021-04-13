@@ -21,7 +21,24 @@ bot = telebot.TeleBot(token)
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
          bot.send_message(message.chat.id, f'Bonjour, {message.from_user.first_name}!\U0001F44B\nЯ бот, облегчающий работу в лаборатории. \n\nУ меня есть база протоколов, которые могут пригодиться в твоих исследованиях. \n\nЧтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')
-                               
+
+         
+#Ответ на приветствие
+@bot.message_handler(content_types=['text'])
+def send_first_message(message):
+    greet = ['hello','hi','привет', 'здравствуй']
+    if any(greetings in message.text.lower() for greetings in greet):
+        bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал!')
+        bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAECEn5gUpnvRKf1xOwyiAABx3Z1rhdguVcAAgUAA8A2TxP5al-agmtNdR4E")
+#бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
+    else:
+        img = Image.open(urlopen(url))
+        bot.send_photo(message.chat.id, img)
+        img.close()
+        bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
+                                
+
+                  
 @bot.message_handler(commands=['help'])
 def help_message(message):
     bot.send_message(message.chat.id, ' С моей помощью ты можешь увидеть протоколы для '
@@ -73,20 +90,7 @@ def callback_handler(message):
             bot.register_next_step_handler(send1,chat(filename=call4.data, message=call4.message))
             
 
-#Ответ на приветствие
-@bot.message_handler(content_types=['text'])
-def send_first_message(message):
-    greet = ['hello','hi','привет', 'здравствуй']
-    if any(greetings in message.text.lower() for greetings in greet):
-        bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал!')
-        bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAECEn5gUpnvRKf1xOwyiAABx3Z1rhdguVcAAgUAA8A2TxP5al-agmtNdR4E")
-#бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
-    else:
-        img = Image.open(urlopen(url))
-        bot.send_photo(message.chat.id, img)
-        img.close()
-        bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
- 
+
 def chat (filename, message):
          service = authorization(ID)
 
@@ -113,8 +117,8 @@ def send(filename, message):
  
 
 def keys(message):
+         
          service = authorization(ID)
-
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
          
          if  results.get('files'):
