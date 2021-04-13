@@ -9,7 +9,7 @@ callback_query_handler1={'Работа с НК':'acid',
                          
 callback_query_handler2={'Назад':'back1'}
 
-callback_data_keyboard_Acid={'Выделение ДНК по Хомчински':'Po_Khomchinski_',
+callback_data_keyboard_Acid={'Выделение ДНК по Хомчински':'dna_extraction_Po_Khomchinski_днк_по_Хомчински_экстракция_выделение',
                         'Выделение ДНК на магнитах':'dna_extraction_Magnitnye_Chastitsy',
                         'Выделение РНК':'extract_rna',
                         'Обратная транскрипция':'reverse_transcription'}
