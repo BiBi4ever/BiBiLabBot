@@ -20,15 +20,13 @@ bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-         bot.send_message(message.chat.id, f'Bonjour, {message.from_user.first_name}!\U0001F44B\nЯ бот, облегчающий работу в лаборатории. \n\nУ меня есть база протоколов, которые могут пригодиться в твоих исследованиях. \n\nЧтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')  
+         bot.send_message(message.chat.id, f'Bonjour, {message.from_user.first_name}!\U0001F44B\n\nЯ бот, облегчающий работу в лаборатории. \n\nУ меня есть база протоколов, которые могут пригодиться в твоих исследованиях. \n\nЧтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')  
 
                   
 @bot.message_handler(commands=['help'])
 def help_message(message):
-    bot.send_message(message.chat.id, ' С моей помощью ты можешь увидеть протоколы для '
-                                      'работы с нуклеиновыми кислотами, обратной транскрипции и '
-                                      'ПЦР.\n\n' 
-                     'Чтобы найти нужный протокол, нажми /protocols. Выбирай поиск с кнопками или воспользуйся поиском по ключу и введи ключевое слово.')
+    bot.send_message(message.chat.id, 'С моей помощью ты можешь увидеть протоколы для работы с нуклеиновыми кислотами(НК), обратной транскрипции и ПЦР.\n\n' 
+                     'Чтобы найти нужный протокол, нажми /protocols и выбери поиск с кнопками или поиск по ключевому слову')
     
 #Ключ или кнопки
 @bot.message_handler(commands=['protocols'])
@@ -38,7 +36,7 @@ def callback_handler(message):
     @bot.callback_query_handler(func=lambda call1: call1.data in [value for value in callback_query_handler.values()])
     def query_handler(call1):
         if call1.data == 'key':
-            send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Введи слово')
+            send = bot.edit_message_text(chat_id=call1.message.chat.id, message_id=call1.message.message_id, text='Не вводи /protocols, /help или /start. Я не смогу обработать эти запросы, пока идет поиск по ключу. \n\nВведи слово:')
             bot.register_next_step_handler(send, keys)
             #Переписывает предыдущее сообщение, кнопки пропадают, код переходит на функцию поиска по ключам,которая ниже
         elif call1.data == 'button':
@@ -70,7 +68,7 @@ def callback_handler(message):
     
     @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
     def query_handler2(call4):
-            send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Твой протокол: \n\n Чтобы начать новый поиск, нажмите /protocols')
+            send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
             bot.register_next_step_handler(send1,chat(filename=call4.data, message=send1))
             
 #Ответ на приветствие
@@ -79,7 +77,13 @@ def send_first_message(message):
     greet = ['hello','hi','привет', 'здравствуй']
     if any(greetings in message.text.lower() for greetings in greet):
         bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал!')
-        bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAECEn5gUpnvRKf1xOwyiAABx3Z1rhdguVcAAgUAA8A2TxP5al-agmtNdR4E")                              
+        bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAECEn5gUpnvRKf1xOwyiAABx3Z1rhdguVcAAgUAA8A2TxP5al-agmtNdR4E")
+#бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
+    else:
+        img = Image.open(urlopen(url))
+        bot.send_photo(message.chat.id, img)
+        img.close()
+        bot.send_message(message.chat.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
 
 
 def chat (filename, message):
