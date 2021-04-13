@@ -87,6 +87,22 @@ def send_first_message(message):
         img.close()
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
  
+def chat (filename, message):
+         service = authorization(ID)
+
+         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filename.text.lower()) ).execute()
+         
+         if  results.get('files'):
+                  for file in results.get('files'):
+                           filename = file.get('name')
+                           request = service.files().get_media(fileId=file.get('id'))
+                           fh = io.FileIO(filename, 'wb')
+                           downloader = MediaIoBaseDownload(fh, request)
+                           done = False
+                           while done is False:
+                                    status, done = downloader.next_chunk()
+                           send(filename, message)
+         
 
 #отправка файла в чатик
 def send(filename, message):
