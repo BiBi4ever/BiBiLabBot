@@ -92,17 +92,16 @@ def chat (filename, message):
 
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filename.lower()) ).execute()
          
-         if  results.get('files'):
-                  for file in results.get('files'):
-                           filename = file.get('name')
-                           request = service.files().get_media(fileId=file.get('id'))
-                           fh = io.FileIO(filename, 'wb')
-                           downloader = MediaIoBaseDownload(fh, request)
-                           done = False
-                           while done is False:
-                                    status, done = downloader.next_chunk()
+         for file in results.get('files'):
+                  filename = file.get('name')
+                  request = service.files().get_media(fileId=file.get('id'))
+                  fh = io.FileIO(filename, 'wb')
+                  downloader = MediaIoBaseDownload(fh, request)
+                  done = False
+                  while done is False:
+                           status, done = downloader.next_chunk()
                            send(filename, message)
-                  bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
+         bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
          
 
 #отправка файла в чатик
