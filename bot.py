@@ -69,7 +69,8 @@ def callback_handler(message):
     
     @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
     def query_handler2(call4):
-            bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text=call4.data)
+            send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='protocol')
+            bot.register_next_step_handler(send1,send(filename=call4.data, message=call4.message))
             
 
 #Ответ на приветствие
