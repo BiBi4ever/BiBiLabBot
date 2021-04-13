@@ -102,6 +102,7 @@ def chat (filename, message):
                            while done is False:
                                     status, done = downloader.next_chunk()
                            send(filename, message)
+                  bot.send_message(message.from_user.id, '\n\n Чтобы начать новый поиск, нажмите /protocols')
          
 
 #отправка файла в чатик
