@@ -7,7 +7,7 @@ import json
 from googleapiclient.http import MediaIoBaseDownload,MediaFileUpload
 import io
 from google_drive import authorization
-from Dicts import keyboard_for_buttons, keyboard_for_buttons1, keyboard_for_buttons2, keyboard_for_buttons3, callback_query_handler, callback_query_handler1, callback_query_handler2, callback_data_keyboard_Acid
+from Dicts import keyboard_for_buttons, keyboard_for_buttons1, keyboard_for_buttons2, keyboard_for_buttons3, callback_query_handler, callback_query_handler1, callback_query_handler2, callback_data_keyboard_Acid, callback_data_keyboard_PCR
 
 
 #картинка
