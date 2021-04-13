@@ -66,6 +66,11 @@ def callback_handler(message):
         if call3.data == 'back1':
             bot.edit_message_text(chat_id=call3.message.chat.id, message_id=call3.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons1)
             bot.answer_callback_query(call3.id)
+    
+    @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
+    def query_handler2(call4):
+            send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Твой протокол')
+            bot.register_next_step_handler(send1, send)
 
 #Ответ на приветствие
 @bot.message_handler(content_types=['text'])
