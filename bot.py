@@ -91,7 +91,7 @@ def chat (filena, message_id):
                   while done is False:                  
                            status, done = downloader.next_chunk()
                   with open(filename, 'rb') as f:
-                           bot.send_document(chat_id: message_id,document: f)
+                           bot.send_document(message_id,f)
                            f.close()
 
 #отправка файла в чатик
