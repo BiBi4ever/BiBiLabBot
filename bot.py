@@ -71,7 +71,7 @@ def callback_handler(message):
     @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
     def query_handler2(call4):
             send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Твой протокол')
-            bot.register_next_step_handler(send1,chat(filename=call4.data, message=call4.message))
+            bot.register_next_step_handler(send1,chat(filename=call4.data, message=send1))
             
 #Ответ на приветствие
 @bot.message_handler(content_types=['text'])
@@ -96,7 +96,7 @@ def chat (filename, message):
                   while done is False:
                            status, done = downloader.next_chunk()
                   send(filename, message)
-         bot.send_message(chat_id=message.chat.id, message_id=message.message_id, text='\n\n Чтобы начать новый поиск, нажмите /protocols')
+         bot.send_message(chat_id=message.chat.id, text='\n\n Чтобы начать новый поиск, нажмите /protocols')
          
 
 #отправка файла в чатик
