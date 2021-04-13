@@ -82,12 +82,6 @@ def send_first_message(message):
     if any(greetings in message.text.lower() for greetings in greet):
         bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал!')
         bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAECEn5gUpnvRKf1xOwyiAABx3Z1rhdguVcAAgUAA8A2TxP5al-agmtNdR4E")
-#бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
-    else:
-        img = Image.open(urlopen(url))
-        bot.send_photo(message.chat.id, img)
-        img.close()
-        bot.send_message(message.chat.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
 
 #Функция чат, выдет нужный протокол к кнопке
 def chat (filename, message):
