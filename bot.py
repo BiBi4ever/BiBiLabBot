@@ -18,6 +18,22 @@ ID = json.loads(os.environ.get('key'))
 
 bot = telebot.TeleBot(token)
 
+#Функция чат, выдет нужный протокол к кнопке
+def chat (filena, message_id):
+         service = authorization(ID)
+
+         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filena.lower()) ).execute()
+         
+         for file in results.get('files'):
+                  filename = file.get('name')
+                  request = service.files().get_media(fileId=file.get('id'))
+                  fh = io.FileIO(filename, 'wb')
+                  downloader = MediaIoBaseDownload(fh, request)
+                  status, done = downloader.next_chunk()
+                  with open(filename, 'rb') as f:
+                           bot.send_document(message_id,f)
+                           f.close()
+
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
          bot.send_message(message.chat.id, f'Bonjour, {message.from_user.first_name}!\U0001F44B\n\nЯ бот, облегчающий работу в лаборатории. \n\nУ меня есть база протоколов, которые могут пригодиться в твоих исследованиях. \n\nЧтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')  
@@ -77,20 +93,6 @@ def callback_handler(message):
                   
 
 #Функция чат, выдет нужный протокол к кнопке
-def chat (filena, message_id):
-         service = authorization(ID)
-
-         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filena.lower()) ).execute()
-         
-         for file in results.get('files'):
-                  filename = file.get('name')
-                  request = service.files().get_media(fileId=file.get('id'))
-                  fh = io.FileIO(filename, 'wb')
-                  downloader = MediaIoBaseDownload(fh, request)
-                  status, done = downloader.next_chunk()
-                  with open(filename, 'rb') as f:
-                           bot.send_document(message_id,f)
-                           f.close()
 
 #отправка файла в чатик
 def Send(filename, message):
