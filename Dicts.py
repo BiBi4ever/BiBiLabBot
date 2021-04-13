@@ -9,10 +9,10 @@ callback_query_handler1={'Работа с НК':'acid',
                          
 callback_query_handler2={'Назад':'back1'}
 
-callback_data_keyboard_Acid={'Выделение ДНК по Хомчински':'DNA_KCHOMCHINSKY',
-                        'Выделение ДНК на магнитах':'DNA_MAGNET',
-                        'Выделение РНК':'RNA',
-                        'Обратная транскрипция':'REVERSE_TRANSCRIPTION'}
+callback_data_keyboard_Acid={'Выделение ДНК по Хомчински':'dna extraction Po Khomchinski днк по Хомчински экстракция выделение',
+                        'Выделение ДНК на магнитах':'dna extraction Magnitnye Chastitsy днк экстракция выделение магнитные частицы магниты',
+                        'Выделение РНК':'extract rna выделение рнк',
+                        'Обратная транскрипция':'reverse transcription обратная транскрипция'}
 
 callback_data_keyboard_PCR={'Обычная ПЦР':'PCR_REARE',
                         'Real time ПЦР c зондами': 'PCR_WITH_ZOND',
