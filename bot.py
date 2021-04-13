@@ -68,37 +68,26 @@ def callback_handler(message):
     @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
     def query_handler2(call4):
             send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
-            bot.register_next_step_handler(send1,chat(filename=call4.data, message=send1))
+            bot.register_next_step_handler(send1,chat(filena=call4.data, message=send1))
          
     @bot.callback_query_handler(func=lambda call5: call5.data in [value for value in callback_data_keyboard_PCR.values()] )
     def query_handler2(call5):
             send2 = bot.edit_message_text(chat_id=call5.message.chat.id, message_id=call5.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
-            bot.register_next_step_handler(send2,chat(filename=call5.data, message=send2))
+            bot.register_next_step_handler(send2,chat(filena=call5.data, message=send2))
                   
-#Ответ на приветствие
-@bot.message_handler(content_types=['text'])
-def send_first_message(message):
-    greet = ['hello','hi','привет', 'здравствуй']
-    if any(greetings in message.text.lower() for greetings in greet):
-        bot.send_message(message.from_user.id, 'Рад тебя видеть! Я скучал!')
-        bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAECEn5gUpnvRKf1xOwyiAABx3Z1rhdguVcAAgUAA8A2TxP5al-agmtNdR4E")
 
 #Функция чат, выдет нужный протокол к кнопке
-def chat (filename, message):
+def chat (filena, message):
          service = authorization(ID)
 
-         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filename.lower()) ).execute()
+         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filena.lower()) ).execute()
          
          for file in results.get('files'):
                   filename = file.get('name')
                   request = service.files().get_media(fileId=file.get('id'))
                   fh = io.FileIO(filename, 'wb')
                   downloader = MediaIoBaseDownload(fh, request)
-                  done = False
-                  while done is False:
-                           status, done = downloader.next_chunk()
                   send(filename, message)
-         
 
 #отправка файла в чатик
 def send(filename, message):
