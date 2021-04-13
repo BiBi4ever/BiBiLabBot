@@ -70,7 +70,7 @@ def callback_handler(message):
     
     @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
     def query_handler2(call4):
-            send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Твой протокол')
+            send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Твой протокол: \n\n Чтобы начать новый поиск, нажмите /protocols')
             bot.register_next_step_handler(send1,chat(filename=call4.data, message=send1))
             
 #Ответ на приветствие
@@ -102,7 +102,6 @@ def chat (filename, message):
 def send(filename, message):
        with open(filename, 'rb') as f:
               bot.send_document(message.chat.id, f)
-              bot.send_message(chat_id=message.chat.id, text='\n\n Чтобы начать новый поиск, нажмите /protocols')
               f.close()
        
  
