@@ -92,11 +92,6 @@ def chat (filena, message_id):
                            f.close()
          bot.send_message(message_id, '\n\n Если хочешь начать новый поиск, нажми /protocols')                  
 
-#отправка файла в чатик
-def Send(filename, message):
-       with open(filename, 'rb') as f:
-              bot.send_document(message.chat.id, f)
-              f.close()
        
 def download_and_send (file, message):
          filename = file.get('name')
