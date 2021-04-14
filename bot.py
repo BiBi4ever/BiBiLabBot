@@ -98,7 +98,7 @@ def Send(filename, message):
               bot.send_document(message.chat.id, f)
               f.close()
        
-def download_and_send (file):
+def download_and_send (file, message):
          filename = file.get('name')
          request = service.files().get_media(fileId=file.get('id'))
          fh = io.FileIO(filename, 'wb')
@@ -117,7 +117,7 @@ def keys(message):
          
          if  results.get('files'):
                   for file in results.get('files'):
-                           download_and_send(file)
+                           download_and_send(file, message)
                   bot.send_message(message.from_user.id, '\n\n Если хочешь начать новый поиск, нажми /protocols')
          else:
                   bot.send_message(message.from_user.id,'Совпадений не найдено. Нажми поиск по ключу и попробуй ввести другое слово', reply_markup=keyboard_for_buttons)
