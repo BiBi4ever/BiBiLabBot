@@ -14,9 +14,8 @@ from Dicts import keyboard_for_buttons, keyboard_for_buttons1, keyboard_for_butt
 url = "https://sun9-40.userapi.com/impg/mG_WTIdgArErQb4YbU7CEIDz873dDvJoH0VW-w/arHUSXBmA5Y.jpg?size=527x505&quality=96&proxy=1&sign=3103cde7044a879a6d8e76a5b8ab2d62&type=album"
 
 token = os.environ.get('token')
-service = authorization(ID) 
 ID = json.loads(os.environ.get('key'))
-
+service = authorization(ID) 
 bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start'])
