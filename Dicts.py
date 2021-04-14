@@ -9,14 +9,14 @@ callback_query_handler1={'Работа с НК':'acid',
                          
 callback_query_handler2={'Назад':'back1'}
 
-callback_data_keyboard_Acid={'Выделение ДНК по Хомчински':'Khomchinski',
-                        'Выделение ДНК на магнитах':'Magnitnye Chastitsy',
-                        'Выделение РНК':'extract rna выделение рнк',
-                        'Обратная транскрипция':'reverse transcription'}
+callback_data_keyboard_Acid={'Выделение ДНК по Хомчински':'1DmogZzc5-vEgDxxqiCB4sC3wHOb9KYHc',
+                        'Выделение ДНК на магнитах':'1C_TYw363bHUPfdFXumlmeqA1TEDP3YEd',
+                        'Выделение РНК':'1Cmvh8kn6BgqiMDcdN1xEF93JXsmyvHfw',
+                        'Обратная транскрипция':'1uZr7I87Ow6VqzTTBqg_0OzuriqUm-Ip-'}
 
-callback_data_keyboard_PCR={'Обычная ПЦР':'regular',
-                        'Real time ПЦР c зондами': 'zond',
-                        'Real time ПЦР sybr':'SYBRE green'}
+callback_data_keyboard_PCR={'Обычная ПЦР':'1Lr0dWQySLjaqHYoc9xG424zUlHTa_sUV',
+                        'Real time ПЦР c зондами': '1O3Qe9OsAX-k3dT9-kvAfawOYsidYkbxR',
+                        'Real time ПЦР sybr':'1WOv4aIC3BG8X05pUSdYPLm1u12MxJAHz'}
 
 keyboard_for_buttons = telebot.types.InlineKeyboardMarkup().add(
         telebot.types.InlineKeyboardButton([key for key in callback_query_handler][0],callback_data=[values for values in callback_query_handler.values()][0]),
