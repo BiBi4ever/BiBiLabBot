@@ -93,9 +93,9 @@ def chat (filena, message_id):
          bot.send_message(message_id, '\n\n Если хочешь начать новый поиск, нажми /protocols')                  
 
        
-def download_and_send (file, message):
-         filename = file.get('name')
-         request = service.files().get_media(fileId=file.get('id'))
+def download_and_send (name, id, message_id):
+         filename = name
+         request = service.files().get_media(fileId=id)
          fh = io.FileIO(filename, 'wb')
          downloader = MediaIoBaseDownload(fh, request)
          done = False
@@ -109,10 +109,10 @@ def download_and_send (file, message):
 def keys(message):
          
          results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % message.text.lower()) ).execute()
-         
+        
          if  results.get('files'):
                   for file in results.get('files'):
-                           download_and_send(file, message)
+                           download_and_send(file.get('name'), file.get('id'), message)
                   bot.send_message(message.from_user.id, '\n\n Если хочешь начать новый поиск, нажми /protocols')
          else:
                   bot.send_message(message.from_user.id,'Совпадений не найдено. Нажми поиск по ключу и попробуй ввести другое слово', reply_markup=keyboard_for_buttons)
