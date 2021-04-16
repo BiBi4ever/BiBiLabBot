@@ -81,7 +81,7 @@ def callback_handler(message):
                   if id_id == call5.data:
                            filename2=name
             send2 = bot.edit_message_text(chat_id=call5.message.chat.id, message_id=call5.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
-            bot.register_next_step_handler(send2,download_and_send(name=filename2, id=call5.data,  message_chat_id=call5.message.chat.id))                 
+            bot.register_next_step_handler(send2,download_and_send(name=filename2, id=call5.data,  message_chat_id=send2.chat.id))                 
 
        
 def download_and_send (name, id, message_chat_id):
