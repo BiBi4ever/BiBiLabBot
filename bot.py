@@ -67,7 +67,7 @@ def callback_handler(message):
     #Ниже идет обработка клавиш и выдачу контретного протокола
     @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
     def query_handler3(call4):
-         if call4.data is in callback_data_keyboard_Acid.values():
+         if call4.data in callback_data_keyboard_Acid.values():
                   filename1=0
                   for name, id_id in callback_data_keyboard_Acid.items():
                            if id_id == call4.data:
