@@ -68,32 +68,15 @@ def callback_handler(message):
     @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
     def query_handler2(call4):
             send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
-            bot.register_next_step_handler(send1,chat(filena=call4.data, message_id=call4.message.chat.id))
+            bot.register_next_step_handler(send1,download_and_send(name=call4.data, id=callback_data_keyboard_Acid.get(call4.data),  message_id=call4.message.chat.id))
          
     @bot.callback_query_handler(func=lambda call5: call5.data in [value for value in callback_data_keyboard_PCR.values()] )
     def query_handler2(call5):
             send2 = bot.edit_message_text(chat_id=call5.message.chat.id, message_id=call5.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
-            bot.register_next_step_handler(send2,chat(filena=call5.data,  message_id=call5.message.chat.id))
-                  
-#Функция чат, выдет нужный протокол к кнопке
-def chat (filena, message_id):
-         service = authorization(ID)
-
-         results = service.files().list(fields="files(name, id)", q =("name contains '%s'" % filena.lower()) ).execute()
-         
-         for file in results.get('files'):
-                  filename = file.get('name')
-                  request = service.files().get_media(fileId=file.get('id'))
-                  fh = io.FileIO(filename, 'wb')
-                  downloader = MediaIoBaseDownload(fh, request)
-                  status, done = downloader.next_chunk()
-                  with open(filename, 'rb') as f:
-                           bot.send_document(message_id,f)
-                           f.close()
-         bot.send_message(message_id, '\n\n Если хочешь начать новый поиск, нажми /protocols')                  
+            bot.register_next_step_handler(send2,download_and_send(name=call5.data, id=callback_data_keyboard_PCR.get(call5.data),  message_id=call5.message.chat.id))                 
 
        
-def download_and_send (name, id, message):
+def download_and_send (name, id, message_id):
          filename = name
          request = service.files().get_media(fileId=id)
          fh = io.FileIO(filename, 'wb')
@@ -102,7 +85,7 @@ def download_and_send (name, id, message):
          while done is False:
                   status, done = downloader.next_chunk()
          with open(filename, 'rb') as f:
-              bot.send_document(message.chat.id, f)
+              bot.send_document(message_id, f)
               f.close()
          
 
@@ -112,7 +95,7 @@ def keys(message):
         
          if  results.get('files'):
                   for file in results.get('files'):
-                           download_and_send(file.get('name'), file.get('id'), message)
+                           download_and_send(file.get('name'), file.get('id'), message_id=message.chat.id)
                   bot.send_message(message.from_user.id, '\n\n Если хочешь начать новый поиск, нажми /protocols')
          else:
                   bot.send_message(message.from_user.id,'Совпадений не найдено. Нажми поиск по ключу и попробуй ввести другое слово', reply_markup=keyboard_for_buttons)
