@@ -67,12 +67,13 @@ def callback_handler(message):
     #Ниже идет обработка клавиш и выдачу контретного протокола
     @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
     def query_handler3(call4):
-            filename1=0
-            for name, id_id in callback_data_keyboard_Acid.items():
-                  if id_id == call4.data:
-                           filename1=name
-            send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
-            bot.register_next_step_handler(send1,download_and_send(name=filename1, id=call4.data,  message_chat_id=call4.inline_message_id))
+         if call4.data is in callback_data_keyboard_Acid.values():
+                  filename1=0
+                  for name, id_id in callback_data_keyboard_Acid.items():
+                           if id_id == call4.data:
+                                    filename1=name
+                  send1 = bot.edit_message_text(chat_id=call4.message.chat.id, message_id=call4.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
+                  bot.register_next_step_handler(send1,download_and_send(name=filename1, id=call4.data,  message_chat_id=call4.chat.id))
          
     @bot.callback_query_handler(func=lambda call5: call5.data in [value for value in callback_data_keyboard_PCR.values()] )
     def query_handler4(call5):
