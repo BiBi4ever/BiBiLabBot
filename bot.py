@@ -72,7 +72,7 @@ def callback_handler(message):
          
     @bot.callback_query_handler(func=lambda call5: call5.data in [value for value in callback_data_keyboard_PCR.values()] )
     def query_handler2(call5):
-            send2 = bot.edit_message_text(chat_id=call5.message.chat.id, message_id=call5.message.message_id, text=call5.data)
+            send2 = bot.edit_message_text(chat_id=call5.message.chat.id, message_id=call5.message.message_id, text=callback_data_keyboard_PCR.keys()[callback_data_keyboard_PCR.values().index(call5.data)])
             bot.register_next_step_handler(send2,download_and_send(name=callback_data_keyboard_PCR.get(call5.data), id=call5.data,  message_id=call5.message.chat.id))                 
 
        
