@@ -48,11 +48,11 @@ def callback_handler(message):
     def query_handler1(call2):
         if call2.data == 'acid':
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons2)
-            bot.answer_callback_query(call2.id)
+            
                   
         elif call2.data == 'PCR':
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons3) 
-            bot.answer_callback_query(call2.id)
+            
     
         elif call2.data == 'back':
             bot.edit_message_text(chat_id=call2.message.chat.id, message_id=call2.message.message_id, text='Можешь выбрать нужный вариант', reply_markup=keyboard_for_buttons)
