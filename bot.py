@@ -93,7 +93,7 @@ def chat (filena, message_id):
          bot.send_message(message_id, '\n\n Если хочешь начать новый поиск, нажми /protocols')                  
 
        
-def download_and_send (name, id, message_id):
+def download_and_send (name, id, message):
          filename = name
          request = service.files().get_media(fileId=id)
          fh = io.FileIO(filename, 'wb')
