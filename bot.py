@@ -66,8 +66,8 @@ def callback_handler(message):
          
     #Ниже идет обработка клавиш и выдачу контретного протокола
     @bot.callback_query_handler(func=lambda call4: call4.data in [value for value in callback_data_keyboard_Acid.values()] )
-    def query_handler2(call4):
-            filenam1e=0
+    def query_handler3(call4):
+            filename1=0
             for name, id_id in callback_data_keyboard_PCR.items():
                   if id_id == call5.data:
                            filename1=name
@@ -75,7 +75,7 @@ def callback_handler(message):
             bot.register_next_step_handler(send1,download_and_send(name=filename1, id=call4.data,  message_chat_id=call4.message.chat.id))
          
     @bot.callback_query_handler(func=lambda call5: call5.data in [value for value in callback_data_keyboard_PCR.values()] )
-    def query_handler2(call5):
+    def query_handler4(call5):
             filename2=0
             for name, id_id in callback_data_keyboard_PCR.items():
                   if id_id == call5.data:
