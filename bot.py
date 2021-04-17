@@ -109,5 +109,8 @@ def keys(message):
          else:
                   bot.send_message(message.from_user.id,'Совпадений не найдено. Нажми поиск по ключу и попробуй ввести другое слово', reply_markup=keyboard_for_buttons)
     
-if __name__ == '__Pup__':
-         bot.polling(none_stop=True)
+while True:
+         try:
+                  bot.polling(none_stop=True)
+         exept Exeption:
+                  time.sleep(10)
