@@ -112,5 +112,4 @@ def keys(message):
 while True:
          try:
                   bot.polling(none_stop=True)
-         exept Exeption:
-                  time.sleep(10)
+
