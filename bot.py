@@ -84,6 +84,18 @@ def callback_handler(message):
             send2 = bot.edit_message_text(chat_id=call5.message.chat.id, message_id=call5.message.message_id, text='Через несколько секунд твой протокол будет прикреплен в сообщении ниже. \n\nЕсли хочешь начать новый поиск, нажми /protocols')
             bot.register_next_step_handler(send2,download_and_send(name=filename2, id=call5.data,  message_chat_id=send2.chat.id))                 
 
+#Ответ на приветствие
+@bot.message_handler(content_types=['text'])
+def send_first_message(message):
+    greet = ['hello','hi','привет', 'здравствуй']
+    if any(greetings in message.text.lower() for greetings in greet):
+        bot.send_message(message.chat.id, 'Рад тебя видеть! Я скучал')
+#бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
+    else:
+        img = Image.open(urlopen(url))
+        bot.send_photo(message.chat.id, img)
+        img.close()
+        bot.send_message(message.chat.id, 'Не понимаю, что это значит. Если тебе нужна помощь, нажми /help')
        
 def download_and_send (name, id, message_chat_id):
          filename = name
