@@ -20,7 +20,7 @@ bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-         bot.send_message(message.chat.id, f'Привет, {message.from_user.first_name}!\U0001F44B\n\nЯ бот, облегчающий работу в лаборатории. \n\nУ меня есть база протоколов, которые могут пригодиться в твоих исследованиях. \n\nЧтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')  
+         bot.send_message(message.chat.id, f'Bonjour, {message.from_user.first_name}!\U0001F44B\n\nЯ бот, облегчающий работу в лаборатории. \n\nУ меня есть база протоколов, которые могут пригодиться в твоих исследованиях. \n\nЧтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')  
 
                   
 @bot.message_handler(commands=['help'])
