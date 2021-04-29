@@ -21,7 +21,7 @@ bot = telebot.TeleBot(token)
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
          bot.send_message(message.chat.id, f'Bonjour, {message.from_user.first_name}!\U0001F44B\n\nЯ бот, облегчающий работу в лаборатории. \n\nУ меня есть база протоколов, которые могут пригодиться в твоих исследованиях. \n\nЧтобы начать поиск протокола, нажми /protocols.\n\nЧтобы увидеть список доступных действий, нажми /help.')  
-
+         bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAEBO85giwUpCtcfJDiaRPIpBnFDwD48BAACuQcAAhhC7ghaNsLzTm3Dph8E')
                   
 @bot.message_handler(commands=['help'])
 def help_message(message):
@@ -89,7 +89,7 @@ def callback_handler(message):
 def send_first_message(message):
     greet = ['hello','hi','привет', 'здравствуй']
     if any(greetings in message.text.lower() for greetings in greet):
-        bot.send_message(message.chat.id, 'Рад тебя видеть! Я скучал')
+        bot.send_message(message.chat.id, 'Рад тебя видеть! Я скучал)')
 #бот кидает мемосную картиночку, если пользователь вводит неправильный запрос
     else:
         img = Image.open(urlopen(url))
